@@ -25,10 +25,13 @@
       </div>
       <!--主体-->
       <div class="index-container">
-          <ul class="index-service layout " id="index-service">
-            <li>
-              <a href=""></a>
-            </li>
+          <ul class="index-service layout" id="index-service">
+            <li><a href=""><i class="el-icon-alarm-clock"><ul class="fo">预约挂号</ul></i></a></li>
+            <li><a href=""><i class="el-icon-document"><ul class="fo">就诊流程</ul></i></a></li>
+            <li><a href=""><i class="el-icon-mouse"><ul class="fo">智能导诊</ul></i></a></li>
+            <li><a href=""><i class="el-icon-service"><ul class="fo">网上咨询</ul></i></a></li>
+            <li><a href=""><i class="el-icon-postcard"><ul class="fo">医保专栏</ul></i></a></li>
+            <li><a href=""><i class="el-icon-map-location"><ul class="fo">交通指南</ul></i></a></li>
           </ul>
       </div>
     </div>
@@ -141,7 +144,7 @@
   }
   /*轮播图导航*/
   .index-service#index-service {
-    height: 100px;
+    height: 93px;
     background-color: #fff;
     border-radius: 50px;
     padding: 0 45px;
@@ -154,6 +157,79 @@
     float: left;
     padding-top: 25px;
   }
-
+  li {
+    list-style: none;
+  }
+  .index-service#index-service li a u {
+    position: relative;
+    top: -4px;
+    margin-left: 20px;
+    font-size: 30px;
+    color: #333;
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  .index-service#index-service li a {
+    display: inline-block;
+    height: 50px;
+  }
+  a {
+    color: #555;
+    outline: none;
+  }
+  del, ins, u, s, a, a:hover {
+    text-decoration: none;
+  }
+  a, button {
+    cursor: pointer;
+  }
+  .index-service#index-service li a:hover u{
+    color: #27616b;
+  }
+  .fo {
+    position: relative;
+    top: -25px;
+    margin-left: 20px;
+    font-size: 20px;
+    color: #333;
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    width: 150px;
+  }
+  .index-service#index-service li a i {
+    color: #35818f;
+    font-size: 33px;
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  .index-service#index-service li+li a {
+    padding-left: 30px;
+    border-left: 1px solid #ddd;
+  }
+  .el-icon-alarm-clock:before {
+    content: "\E703";
+    margin-right: 110px;
+  }
+  .el-icon-document:before{
+    margin-right:110px;
+  }
+  .el-icon-mouse:before{
+    margin-right:110px;
+  }
+  .el-icon-service:before{
+    margin-right:110px;
+  }
+  .el-icon-postcard:before{
+    margin-right:110px;
+  }
+  .el-icon-map-location:before{
+    margin-right:110px;
+  }
 </style>
 
