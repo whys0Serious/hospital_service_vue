@@ -3,7 +3,7 @@
     <div id="boday">
       <nav class="nav main-nav" id="nav">
         <ul class="nav-lists layout clearfix">
-          <li class="cur"><a>首页</a></li>
+          <li class="cur"><a @click="shouye">首页</a></li>
           <li><a>平台概况</a></li>
           <li><a>患者服务</a></li>
           <li><a>新闻中心</a></li>
@@ -28,7 +28,7 @@
           <ul class="index-service layout" id="index-service">
             <li><a href=""><i class="el-icon-alarm-clock"><ul class="fo">预约挂号</ul></i></a></li>
             <li><a href=""><i class="el-icon-document"><ul class="fo">就诊流程</ul></i></a></li>
-            <li><a href=""><i class="el-icon-mouse"><ul class="fo">智能导诊</ul></i></a></li>
+            <li><a @click="zhineng"><i class="el-icon-mouse"><ul class="fo">智能导诊</ul></i></a></li>
             <li><a href=""><i class="el-icon-service"><ul class="fo">网上咨询</ul></i></a></li>
             <li><a href=""><i class="el-icon-postcard"><ul class="fo">医保专栏</ul></i></a></li>
             <li><a href=""><i class="el-icon-map-location"><ul class="fo">交通指南</ul></i></a></li>
@@ -51,6 +51,14 @@
           {src:'http://122.51.42.29:8888/group1/M00/00/00/rBEAEF3IuIqAI0KMAAQZ3KOA6FE86..jpg'},
         ],
       }
+    },
+    methods:{
+      zhineng:function () {
+        this.$router.push("zhineng")
+      },
+      shouye:function () {
+        this.$router.push("/")
+      }
     }
   }
 
@@ -63,6 +71,8 @@
     width: 100%;
     height: 100%;
   }
+
+  /*导航*/
   .nav{
     min-width: 1200px;
     height: 10%;
