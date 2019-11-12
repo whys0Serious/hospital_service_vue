@@ -4,6 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import index from '@/components/index'
 import regist from '@/components/regist'
 import login from '@/components/login'
+import zhineng from '@/components/zhineng'
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -27,6 +29,11 @@ export default new Router({
       path:'/login',
       name:'login',
       component:login
+    },
+    {
+      path: '/zhineng',
+      name: 'zhineng',
+      component: zhineng
     }
   ]
 })
