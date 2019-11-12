@@ -22,9 +22,9 @@
               </div>
             </div>
             <div v-if="!flag">
-              <div class="info1"><el-button type="warning">注册</el-button></div>
-              <div class="info1"><el-button type="success">登陆</el-button></div>
-              <div class="info1" style="line-height: 51px;font-size: large;color: darkblue;font-weight:bolder;font-family:'Times New Roman',Times,serif;">游客您好！立即:</div>
+              <div class="info1"><el-button  type="warning"><a href="http://localhost:9100/#/regist" style="color: white">注册</a> </el-button></div>
+              <div class="info1"><el-button type="success"><a href="http://localhost:9100/#/login" style="color: white">登陆</a></el-button></div>
+              <div class="info1" style="line-height: 51px;font-size: large;color: #8b3200;font-weight:bolder;font-family:'Times New Roman',Times,serif;">游客您好！立即:</div>
             </div>
           </div>
         </div>
