@@ -1,4 +1,4 @@
-<template>
+<template xmlns:font-family="http://www.w3.org/1999/xhtml">
   <div id="app">
     <div id="whole">
       <div id="shoulan">
@@ -13,7 +13,7 @@
           </div>
           <!--登陆-->
           <div class="userinfo">
-            <div v-if="flag!=false">
+            <div v-if="flag">
               <div class="userimg"><img src="../src/components/static/img/userlogo.jpg" height="100%" width="100%"/></div>
               <div class="userimg_left">
                 <div style="float: right;width: 100%"><div style="margin-left: 40%"><span class="logsize">欢迎 ,</span><span class="logze">张小米 </span><span class="logsize"> 登陆平台</span></div></div>
@@ -21,10 +21,10 @@
                 <div class="info"><el-button type="warning">我的收藏</el-button></div>
               </div>
             </div>
-            <div v-if="flag==false">
-              <div class="info1"><el-button type="warning">注册</el-button></div>
-              <div class="info1"><el-button type="success">登陆</el-button></div>
-              <div class="info1">请游客您，</div>
+            <div v-if="!flag">
+              <div class="info1"><el-button  type="warning"><a href="http://localhost:9100/#/regist" style="color: white">注册</a> </el-button></div>
+              <div class="info1"><el-button type="success"><a href="http://localhost:9100/#/login" style="color: white">登陆</a></el-button></div>
+              <div class="info1" style="line-height: 51px;font-size: large;color: #8b3200;font-weight:bolder;font-family:'Times New Roman',Times,serif;">游客您好！立即:</div>
             </div>
           </div>
         </div>
@@ -40,14 +40,16 @@ export default {
   data(){
     return{
         state:'',
-      flag:false
-
-      }
-    },
+        flag:false,
+    }
+  },
   methods:{
     handleSelect(){
 
     }
+  },
+  mounted(){
+
   }
 
 }
