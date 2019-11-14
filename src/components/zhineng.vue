@@ -36,7 +36,9 @@
 <script>
   export default {
     data(){
+      return{
 
+      }
     },
     methods:{
       shouye:function () {
