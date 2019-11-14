@@ -10,6 +10,9 @@ import nav from '@/components/nav'
 import userMsg from '@/components/userMsg'
 import userMedicalhistory from '@/components/userMedicalhistory'
 import guahao from '@/components/guahao'
+import yanke from '@/components/yanke'
+import docter from '@/components/docter'
+import docterinfo from '@/components/docterinfo'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -38,7 +41,20 @@ export default new Router({
     {
       path: '/zhineng',
       name: 'zhineng',
-      component: zhineng
+      component: zhineng,
+      children:[
+        {path:'yanke',name:'yanke',component:yanke}
+      ]
+    },
+    {
+      path: '/docter',
+      name: 'docter',
+      component: docter
+    },
+    {
+      path: '/docterinfo',
+      name: 'docterinfo',
+      component: docterinfo
     },
     {
       path:'/userContainer',
@@ -65,5 +81,6 @@ export default new Router({
       name:'guahao',
       component:guahao
     }
+
   ]
 })

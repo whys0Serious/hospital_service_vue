@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <div id="app">
@@ -39,8 +40,8 @@
           <li><a>平台概况</a></li>
           <li><a>患者服务</a></li>
           <li><a>新闻中心</a></li>
-          <li><a>科室介绍</a></li>
-          <li><a>医生介绍</a></li>
+          <li><a :to="{name:'docter'}">科室介绍</a></li>
+          <li><a @click="yisheng">医生介绍</a></li>
           <li><a>科研教学</a></li>
           <li><a>党建园地</a></li>
           <li><a>健康咨询</a></li>
@@ -58,12 +59,12 @@
       <!--主体-->
       <div class="index-container">
           <ul class="index-service layout" id="index-service">
-            <li><a href=""><i class="el-icon-alarm-clock"><ul class="fo">预约挂号</ul></i></a></li>
-            <li><a href=""><i class="el-icon-document"><ul class="fo">就诊流程</ul></i></a></li>
-            <li><a @click="zhineng"><i class="el-icon-mouse"><ul class="fo">智能导诊</ul></i></a></li>
-            <li><a href=""><i class="el-icon-service"><ul class="fo">网上咨询</ul></i></a></li>
-            <li><a href=""><i class="el-icon-postcard"><ul class="fo">医保专栏</ul></i></a></li>
-            <li><a href=""><i class="el-icon-map-location"><ul class="fo">交通指南</ul></i></a></li>
+            <li><a href=""><i><img src="../components/static/img/naozhong.png">预约挂号</i></a></li>
+            <li><a href=""><i><img src="../components/static/img/liucheng.png">就诊流程</i></a></li>
+            <li><a @click="zhineng"><i><img src="../components/static/img/zhidao.png">智能导诊</i></a></li>
+            <li><a href=""><i><img src="../components/static/img/zixun.png">网上咨询</i></a></li>
+            <li><a href=""><i><img src="../components/static/img/yibao.png">医保专栏</i></a></li>
+            <li><a href=""><i><img src="../components/static/img/jiaotong.png">交通指南</i></a></li>
           </ul>
       </div>
     </div>
@@ -86,12 +87,16 @@
         user:[],
       }
     },
+
     methods:{
       zhineng:function () {
         this.$router.push("zhineng")
       },
       shouye:function () {
         this.$router.push("/")
+      },
+      yisheng:function () {
+        this.$router.push("docter")
       },
       loginOut(){
         var id=this.$cookie.get("userMsg")
@@ -120,7 +125,7 @@
 
 </script>
 
-<style>
+<style >
   #boday{
     width: 100%;
     height: 100%;
@@ -129,7 +134,7 @@
   /*导航*/
   .nav{
     min-width: 1200px;
-    height: 10%;
+    height: 60px;
     position: relative;
     box-shadow: rgba(0,0,0,0.2) 0px 5px 5px;
     background: -webkit-linear-gradient(90deg, #23565f 0%, #23565f 14%, #368290 100%, #368290 100%);
@@ -208,6 +213,8 @@
   }
   /*轮播图导航*/
   .index-service#index-service {
+    display: flex;
+    justify-content: center;
     height: 93px;
     background-color: #fff;
     border-radius: 50px;
@@ -266,14 +273,24 @@
   }
   .index-service#index-service li a i {
     color: #35818f;
-    font-size: 33px;
+    font-style: normal;
+    font-size: 24px;
     transition: all .5s;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     -o-transition: all .5s;
   }
+  .index-service#index-service li a i img{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 5px;
+    left: -7px;
+  }
+  .index-service#index-service li a{
+    padding: 0 20px;
+  }
   .index-service#index-service li+li a {
-    padding-left: 30px;
     border-left: 1px solid #ddd;
   }
   .el-icon-alarm-clock:before {

@@ -23,7 +23,8 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 9100, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    //其他服务端口围绕在8000-9000，所以修改出掉之前的9100
+    port: 1100, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
