@@ -38,7 +38,6 @@
                       </div>
                       <span class="produce-title">个人简介</span>
                       <div class="content-padding-top"></div>
-
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{docters.specialty}}
                     </div>
                   </div>
@@ -64,15 +63,17 @@
                       <div class="list-content">
                         <div class="dm-experts-boxer slider clearfix">
                           <!--遍历同科室的医师-->
-                          <div class="expert-info">
-                            <a class="doc-img" href="">
+                          <div class="expert-info" v-for="d in doc">
+                            <a class="doc-img" @click="query(d.did)" >
+                              <!--<router-link :to="{name:'docterinfo',query:{did:d.did}}"></router-link>-->
                               <div>
-                                <img src="http://upload.409yy.com/2019/0328/thumb_144_200_20190328090735268.jpg"/>
+                                <img :src="d.doc_pic"/>
                               </div>
-                              <strong>魏福奎</strong>
+                              <strong>{{d.doc_name}}</strong>
                               <p>
-                                <u>主任医师</u>
+                                <u>{{d.zhicheng}}</u>
                               </p>
+                              <!--</router-link>-->
                             </a>
                           </div>
                         </div>
@@ -98,7 +99,8 @@
       return {
         docters: {
           doc_name: '', department: '', zhicheng: '', doc_pic: '',specialty: '',did:''
-        }
+        },
+        doc:[],
       }
     },
     methods:{
@@ -107,22 +109,30 @@
       },
       yisheng:function () {
         this.$router.push("docter")
+      },
+      query(id){
+        //根据查询医生详情
+        axios.post("api/hospital-search/findDocterInfo",{did:id}).then(res=>{
+          this.docters=res.data;
+        })
+        //根据该用户查询同科室医生查询课程详情
+        axios.get("api/hospital-search/findDocterNotDepatment/"+id).then(res=>{
+          this.doc=res.data;
+          console.log(this.doc)
+        })
       }
     },
     mounted(){
-      //根据查询课程详情
-      axios.post("api/hospital-search/findDocterInfo",{did:this.$route.query.did}).then(res=>{
-        this.docters=res.data;
-      })
+      this.query(this.$route.query.did);
     }
   }
 </script>
 
-<style>
+<style >
 
-  #boday{
+  #boday {
     width: 100%;
-    height: 100%;
+    height: 900px;
   }
   .nav{
     min-width: 1200px;
@@ -383,6 +393,17 @@
   .dm-experts-boxer .expert-info a, .dm-experts-boxer .expert-info strong {
     display: block;
     text-align: center;
+  }
+
+  .dm-experts-boxer .expert-info a.doc-img>div img {
+    display: block;
+    width: 140px;
+    height: 191px;
+    margin: auto;
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
   }
 
   .dm-experts-boxer .expert-info a.doc-img>div {

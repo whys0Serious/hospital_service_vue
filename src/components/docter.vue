@@ -32,9 +32,9 @@
               <dt>所在科室：</dt>
               <dd>
                 <ul class="tab-pannel">
-                  <li>
-                    <a class="cur" title="全部"><span>全部</span></a>
-                    <a title="急诊科门诊"><span>急诊科门诊</span></a>
+                  <li >
+                    <a class="cur" title="全部" ><span>全部</span></a>
+                    <a title="急诊科门诊" ><span>急诊科门诊</span></a>
                     <a title="眼科门诊"><span>眼科门诊</span></a>
                     <a title="心血管内科门诊"><span>心血管内科门诊</span></a>
                     <a title="神经内科门诊"><span>神经内科门诊</span></a>
@@ -76,7 +76,7 @@
               <span>您已经选择：</span>
               <a href="js">全部</a>
               <div class="fr">
-                共 <u> 80 </u> 医生
+                共 <u> {{this.total}} </u> 医生
               </div>
             </div>
             <div class="doctor-list mt25">
@@ -104,7 +104,7 @@
 
                       <p>
                         <small>科室：</small>
-                        <u title="消化内科">{{department}}</u>
+                        <u title="消化内科">{{ds.department}}</u>
                         <br/>
                         <small>专长：</small>
                         {{ds.specialty}}
@@ -118,9 +118,8 @@
           </div>
         </div>
       </div>
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-
-
+      <el-pagination background layout="prev, pager, next" :page-size="this.params.size" v-on:current-change="changePage" :total="total" :current-page="this.params.page">
+      </el-pagination>
     </div>
 
   </div>
@@ -132,18 +131,44 @@
   export default {
     data(){
       return{
+        // flag: -1,
+        // tagList:[
+        //   {name:"全部",id:1,},{name:"急诊科门诊",id:2,},{name:"眼科门诊",id:3,},{name:"心血管内科门诊",id:4,},
+        //   {name:"神经内科门诊",id:5,},{name:"消化科门诊",id:6,},{name:"儿科门诊",id:7,},{name:"呼吸内科",id:8,},
+        //   {name:"泌尿外科",id:9,},{name:"口腔科门诊",id:10,},{name:"妇产科门诊",id:11,},{name:"肾病内分泌科",id:12,},{name:"肿瘤内科",id:13,},
+        // ],
         show: false,
         xhk:false,
         docters:[],
+        total:this.total,
+        params:{
+          page:1,
+          size:12
+        },
       }
     },
     methods:{
+      // choseprofrom:function (id) {
+      //   this.flag = id;
+      // },
       shouyea:function () {
         this.$router.push("/")
       },
       yisheng:function () {
         this.$router.push("docter")
-      }
+      },
+      changePage:function (e) {
+        this.params.page=e
+        this.query();
+      },
+      query:function () {
+        var url="api/hospital-search/searchall/"+this.params.page+"/"+this.params.size
+        axios.get(url).then(res=>{
+          this.docters=res.data.list;
+          console.log(this.docters)
+          this.total=res.data.total;
+        })
+      },
     },
     mounted(){
       // axios.get("api/hospital-search/createBase").then(res=>{
@@ -154,17 +179,23 @@
       //   console.log(res.data)
       //   this.docters=res.data;
       // })
-      axios.get("api/hospital-search/searchall").then(res=>{
-        console.log(res.data)
-        this.docters=res.data;
+
+      axios.get("api/hospital-search/searchall/"+this.params.page+"/"+this.params.size).then(res=>{
+        this.docters=res.data.list;
+        this.total=res.data.total;
       })
+      // axios.get("api/hospital-search/searchdepat/").then(res=>{
+      //   this.docters=res.data.list;
+      //   this.total=res.data.total;
+      // })
+
     }
   }
 
 </script>
 
 
-<style >
+<style>
 
   #boday{
     width: 100%;
@@ -561,10 +592,14 @@
     /*box-shadow:0px -3px 0px 0px #2dffc3;!*增加阴影效果*!*/
     /*transition:all 500ms!*动画过渡*!*/
   /*}*/
-  .doc-img:hover{
-    position:relative;/*改成相对定位*/
-    box-shadow:0px 0px 0px 2px #ff902e;/*增加阴影效果*/
-    transition:all 500ms/*动画过渡*/
+
+  .doc-img img:hover{
+    cursor: pointer;
+    transition: all 0.6s;
+  }
+
+  .doc-img img:hover{
+    transform: scale(1.20);
   }
   .dm-experts-boxer .expert-info a.doc-img>div img {
     display: block;
@@ -578,5 +613,19 @@
   }
   .el-pagination {
     margin-bottom: 2%;
+  }
+  .secectBackground{
+    height: 80/75rem;
+    padding-left: 67/75rem;
+    padding-right: 67/75rem;
+    border-radius: 4px;
+    border: 2/75rem solid #C81623;
+    margin-right: 20/75rem;
+    margin-bottom: 20/75rem;
+    color: #C81623;
+    font-size: 36/75rem;
+    align-items: center;
+    display: flex;
+
   }
 </style>
