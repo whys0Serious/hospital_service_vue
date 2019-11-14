@@ -8,7 +8,7 @@
           <li><a>患者服务</a></li>
           <li><a>新闻中心</a></li>
           <li><a>科室介绍</a></li>
-          <li><a>医生介绍</a></li>
+          <li><a  @click="yisheng">医生介绍</a></li>
           <li><a>科研教学</a></li>
           <li><a>党建园地</a></li>
           <li><a>健康咨询</a></li>
@@ -24,23 +24,72 @@
           </div>
       </div>
       <div class="zhuti">
-          <div class="zhutu"><img src="http://122.51.42.29:8888/group1/M00/00/00/rBEAEF3JKK6ARAaQAAPcB-fqiaY40..jpg"/></div>
+          <div class="zhutu">
+            <img src="http://122.51.42.29:8888/group1/M00/00/00/rBEAEF3JKK6ARAaQAAPcB-fqiaY40..jpg"/>
+            <button class="yk" @click="show = !show"></button>
+            <button class="xh"  @click="xhk=!xhk&&show==show">消化科门诊</button>
+            <button class="xx" >心血管内科门诊</button>
+            <button class="ggk" >骨外科门诊</button>
+          </div>
+
+
+        <div class="zhisearch">
+          <!--头部类-->
+          <div style="display: flex; margin-top: 20px; height: 100px;">
+            <transition name="el-fade-in-linear">
+              <div  v-show="show==false" class="transition-box">选择您不舒服的部位</div>
+            </transition>
+            <transition name="el-fade-in-linear">
+              <div v-show="show" class="tui">推荐门诊</div>
+            </transition>
+            <transition name="el-fade-in-linear">
+              <div v-show="show" class="transition-box">眼科门诊</div>
+            </transition>
+            <transition name="el-fade-in">
+              <div v-show="show" class="transition-box">耳鼻喉科门诊</div>
+            </transition>
+            <transition name="el-fade-in">
+              <div v-show="show" class="transition-box">口腔科门诊</div>
+            </transition>
+          </div>
+
+
+
+        </div>
+
+
+
       </div>
 
+
+
+      <!--foot 没做呢，对着图片这样弄出来-->
+      <div class="foott">
+        <img src="../components/static/img/微信截图_20191111210359.png"  style="height: 100%;width: 100%"/>
+      </div>
 
     </div>
 
   </div>
 </template>
 
-<script>
+<script >
   export default {
     data(){
-
+      return{
+        show: false,
+        xhk:false,
+      }
     },
     methods:{
-      shouye:function () {
+      shouye () {
         this.$router.push("/")
+      },
+      yisheng () {
+        this.$router.push("docter")
+      },
+      fun(){
+
       }
     }
   }
@@ -49,7 +98,7 @@
 
 
 
-<style>
+<style >
 
   #boday{
     width: 100%;
@@ -57,7 +106,7 @@
   }
   .nav{
     min-width: 1200px;
-    height: 10%;
+    height: 60px;
     position: relative;
     box-shadow: rgba(0,0,0,0.2) 0px 5px 5px;
     background: -webkit-linear-gradient(90deg, #23565f 0%, #23565f 14%, #368290 100%, #368290 100%);
@@ -154,12 +203,82 @@
     margin: auto;
     background-color: #08080a;
   }
+  .tui {
+    margin-left: 20px;
+    font-size: 20px;
+    color: #fc9898;
+    width: 176px;
+    z-index: 9999;
+  }
+  .transition-box {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 100px;
+    border-radius: 4px;
+    background-color: #08080a;
+    text-align: center;
+    color: #fff;
+    padding: 200px 0px;
+    box-sizing: border-box;
+    margin-right: 20px;
+    font-size: 20px;
+
+  }
+
+  .zhutu img {
+    width: 100%;
+    height: 95%;
+  }
   .zhutu{
     width: 60%;
     height: 100%;
+    float: left;
   }
-  .zhutu img{
+  .zhisearch{
+    width: 40%;
+    height: 60%;
+    background-color: #08080a;
+    float: right;
+  }
+  .yk {
+    width: 50px;
+    background:none;
+    border:none;
+    outline:none;
+    color: #13ce66;
+    position: relative;
+    top: -100%;
+    left: 18%;
+     z-index: 9996;
+    height: 60px;
+  }
+  .xh{
+    color: #13ce66;
+    position: relative;
+    top: -75%;
+    left: 11%;
+     z-index: 9997;
+    height: 60px;
+  }
+  .xx{
+    color: #13ce66;
+    position: relative;
+    top: -88%;
+    left: 2%;
+     z-index: 9998;
+    height: 60px;
+  }
+  .ggk{
+    color: #13ce66;
+    position: relative;
+    top: -40%;
+    left: -12%;
+     z-index: 9999;
+    height:250px;
+    width: 150px;
+  }
+  .foott{
     width: 100%;
-    height: 100%;
+    height: 20%;
   }
 </style>

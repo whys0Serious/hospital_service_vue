@@ -39,16 +39,21 @@ export default {
   name: 'App',
   data(){
     return{
-      data(){
-        flag:false;
+        state:'',
+      flag:false
 
       }
+    },
+  methods:{
+    handleSelect(){
+
     }
   }
+
 }
 </script>
 
-<style>
+<style >
   *{
     padding:0;
     margin: 0;
