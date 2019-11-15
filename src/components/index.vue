@@ -38,8 +38,10 @@
         <ul class="nav-lists layout clearfix">
           <li class="cur"><a @click="shouye">首页</a></li>
           <li><a>平台概况</a></li>
-          <li><a>患者服务</a></li>
+          <li><a @click="liucheng">患者服务</a></li>
           <li><a>新闻中心</a></li>
+          <li><a @click="keshi">科室介绍</a></li>
+          <li><a>医生介绍</a></li>
           <li><a :to="{name:'docter'}">科室介绍</a></li>
           <li><a @click="yisheng">医生介绍</a></li>
           <li><a>科研教学</a></li>
@@ -89,6 +91,9 @@
     },
 
     methods:{
+        keshi:function () {
+          this.$router.push("department")
+        },
       zhineng:function () {
         this.$router.push("zhineng")
       },
@@ -97,6 +102,9 @@
       },
       yisheng:function () {
         this.$router.push("docter")
+      },
+      liucheng:function () {
+        this.$router.push("pic")
       },
       loginOut(){
         var id=this.$cookie.get("userMsg")

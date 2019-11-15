@@ -5,18 +5,22 @@ import index from '@/components/index'
 import regist from '@/components/regist'
 import login from '@/components/login'
 import zhineng from '@/components/zhineng'
+import department from '@/components/department'
+import departmentInfo from '@/components/departmentInfo'
 import userContainer from '@/components/userContainer'
-import nav from '@/components/nav'
 import userMsg from '@/components/userMsg'
 import userMedicalhistory from '@/components/userMedicalhistory'
 import guahao from '@/components/guahao'
 import yanke from '@/components/yanke'
 import docter from '@/components/docter'
 import docterinfo from '@/components/docterinfo'
+import pic from '@/components/pic'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import axios from 'axios'
 
+Vue.use(axios)
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -41,7 +45,22 @@ export default new Router({
     {
       path: '/zhineng',
       name: 'zhineng',
-      component: zhineng,
+      component: zhineng
+    },
+    {
+      path: '/department',
+      name: 'department',
+      component: department
+    },
+    {
+      path: '/departmentInfo',
+      name: 'departmentInfo',
+      component: departmentInfo
+    },
+    {
+      path: '/zhineng',
+      name: 'zhineng',
+      component:zhineng,
       children:[
         {path:'yanke',name:'yanke',component:yanke}
       ]
@@ -62,11 +81,6 @@ export default new Router({
       component:userContainer
     },
     {
-      path:'/nav',
-      name:nav,
-      component:nav
-    },
-    {
       path:'/userMsg',
       name:'userMsg',
       component:userMsg
@@ -80,6 +94,11 @@ export default new Router({
       path:'/guahao',
       name:'guahao',
       component:guahao
+    },
+    {
+      path:'/pic',
+      name:'pic',
+      component:pic
     }
 
   ]
