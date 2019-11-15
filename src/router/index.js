@@ -8,6 +8,7 @@ import zhineng from '@/components/zhineng'
 import yanke from '@/components/yanke'
 import docter from '@/components/docter'
 import docterinfo from '@/components/docterinfo'
+import docterback from '@/components/docterback'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -50,6 +51,12 @@ export default new Router({
       path: '/docterinfo',
       name: 'docterinfo',
       component: docterinfo
+    },
+    {
+      path: '/docterback',
+      name: 'docterback',
+      component: docterback,
+
     }
 
   ]

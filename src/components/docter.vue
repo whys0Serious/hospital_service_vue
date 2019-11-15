@@ -31,22 +31,24 @@
             <dl>
               <dt>所在科室：</dt>
               <dd>
-                <ul class="tab-pannel">
+                <ul class="tab-pannel" >
                   <li >
-                    <a class="cur" title="全部" ><span>全部</span></a>
-                    <a title="急诊科门诊" ><span>急诊科门诊</span></a>
-                    <a title="眼科门诊"><span>眼科门诊</span></a>
-                    <a title="心血管内科门诊"><span>心血管内科门诊</span></a>
-                    <a title="神经内科门诊"><span>神经内科门诊</span></a>
-                    <a title="消化科门诊"><span>消化科门诊</span></a>
-                    <a title="儿科门诊"><span>儿科门诊</span></a>
-                    <a title="呼吸内科"><span>呼吸内科</span></a>
-                    <a title="耳鼻咽喉科"><span>耳鼻咽喉科</span></a>
-                    <a title="泌尿外科"><span>泌尿外科</span></a>
-                    <a title="口腔科门诊"><span>口腔科门诊</span></a>
-                    <a title="妇产科门诊"><span>妇产科门诊</span></a>
-                    <a title="肾病内分泌科"><span>肾病内分泌科</span></a>
-                    <a title="肿瘤内科"><span>肿瘤内科</span></a>
+                    <div v-for="(target,id) in tagList" :key="id" @click="choseprofrom(id)">
+                      <a v-bind:class="{'cur':flag==id}" ><span>{{target.name}}</span></a>
+                    </div>
+                    <!--<a title="急诊科门诊" ><span>急诊科门诊</span></a>-->
+                    <!--<a title="眼科门诊"><span>眼科门诊</span></a>-->
+                    <!--<a title="心血管内科门诊"><span>心血管内科门诊</span></a>-->
+                    <!--<a title="神经内科门诊"><span>神经内科门诊</span></a>-->
+                    <!--<a title="消化科门诊"><span>消化科门诊</span></a>-->
+                    <!--<a title="儿科门诊"><span>儿科门诊</span></a>-->
+                    <!--<a title="呼吸内科"><span>呼吸内科</span></a>-->
+                    <!--<a title="耳鼻咽喉科"><span>耳鼻咽喉科</span></a>-->
+                    <!--<a title="泌尿外科"><span>泌尿外科</span></a>-->
+                    <!--<a title="口腔科门诊"><span>口腔科门诊</span></a>-->
+                    <!--<a title="妇产科门诊"><span>妇产科门诊</span></a>-->
+                    <!--<a title="肾病内分泌科"><span>肾病内分泌科</span></a>-->
+                    <!--<a title="肿瘤内科"><span>肿瘤内科</span></a>-->
                   </li>
                 </ul>
               </dd>
@@ -57,12 +59,14 @@
               <dd>
                 <ul class="tab-pannel">
                   <li>
-                    <a class="cur"><span>全部</span></a>
-                    <a ><span>主任医师</span></a>
-                    <a ><span>副主任医师</span></a>
-                    <a ><span>主治医师</span></a>
-                    <a ><span>医师</span></a>
-                    <a ><span>主任药师</span></a>
+                    <div v-for="(zw,ida) in zhiwei" :key="ida" @click="choseprofromZhi(ida)">
+                    <a v-bind:class="{'cur':fla==ida}"  ><span>{{zw.name}}</span></a>
+                    <!--<a ><span>主任医师</span></a>-->
+                    <!--<a ><span>副主任医师</span></a>-->
+                    <!--<a ><span>主治医师</span></a>-->
+                    <!--<a ><span>医师</span></a>-->
+                    <!--<a ><span>主任药师</span></a>-->
+                    </div>
                   </li>
                 </ul>
               </dd>
@@ -127,30 +131,65 @@
 </template>
 
 <script>
+  import $ from 'jquery';
   import axios from 'axios'
   export default {
+
     data(){
       return{
-        // flag: -1,
-        // tagList:[
-        //   {name:"全部",id:1,},{name:"急诊科门诊",id:2,},{name:"眼科门诊",id:3,},{name:"心血管内科门诊",id:4,},
-        //   {name:"神经内科门诊",id:5,},{name:"消化科门诊",id:6,},{name:"儿科门诊",id:7,},{name:"呼吸内科",id:8,},
-        //   {name:"泌尿外科",id:9,},{name:"口腔科门诊",id:10,},{name:"妇产科门诊",id:11,},{name:"肾病内分泌科",id:12,},{name:"肿瘤内科",id:13,},
-        // ],
+        flag: -1,
+        fla: -1,
+        tagList:[
+          {name:"全部",id:1,},{name:"急诊科门诊",id:2,},{name:"眼科门诊",id:3,},{name:"心血管内科门诊",id:4,},
+          {name:"神经内科门诊",id:5,},{name:"消化科门诊",id:6,},{name:"儿科门诊",id:7,},{name:"呼吸内科",id:8,},
+          {name:"泌尿外科",id:9,},{name:"口腔科门诊",id:10,},{name:"妇产科门诊",id:11,},{name:"肾病内分泌科",id:12,},{name:"肿瘤内科",id:13,},
+        ],
+        zhiwei:[
+          {name:"全部",ida:1,},{name:"主任医师",ida:2,},{name:"副主任医师",ida:3,},{name:"主治医师",ida:4,},
+          {name:"医师",ida:5,},{name:"主任药师",ida:6,},
+        ],
         show: false,
         xhk:false,
         docters:[],
         total:this.total,
         params:{
           page:1,
-          size:12
+          size:12,
         },
       }
     },
     methods:{
-      // choseprofrom:function (id) {
-      //   this.flag = id;
-      // },
+      choseprofrom:function (id) {
+        this.flag = id;
+        var department=this.tagList[id].name;
+        var zhiwei=this.zhiwei[id].name;
+        if (department=="全部" && zhiwei=="全部"){
+          department=""
+          zhiwei=""
+        }
+        console.log(department)
+        var url="api/hospital-search/searchall?page="+this.params.page+"&size="+this.params.size+"&department="+department+"&zhiwei="
+        axios.get(url).then(res=>{
+          this.docters=res.data.list;
+          console.log(this.docters)
+          this.total=res.data.total;
+        })
+      },
+      choseprofromZhi:function (ida) {
+        this.fla = ida;
+        var department=this.tagList[ida].name;
+        var zhiwei=this.zhiwei[ida].name;
+        if (zhiwei=="全部" && zhiwei=="全部"){
+          // department=""
+          zhiwei=""
+        }
+        var url="api/hospital-search/searchall?page="+this.params.page+"&size="+this.params.size+"&department="+"&zhiwei="+zhiwei
+        axios.get(url).then(res=>{
+          this.docters=res.data.list;
+          console.log(this.docters)
+          this.total=res.data.total;
+        })
+      },
       shouyea:function () {
         this.$router.push("/")
       },
@@ -162,7 +201,7 @@
         this.query();
       },
       query:function () {
-        var url="api/hospital-search/searchall/"+this.params.page+"/"+this.params.size
+        var url="api/hospital-search/searchall?page="+this.params.page+"&size="+this.params.size+"&department="+"&zhiwei="
         axios.get(url).then(res=>{
           this.docters=res.data.list;
           console.log(this.docters)
@@ -170,7 +209,13 @@
         })
       },
     },
+
     mounted(){
+      // $(function(){
+      //   $(".tab-pannel li div a span").click(function () {
+      //     alert(2156)
+      //   })
+      // });
       // axios.get("api/hospital-search/createBase").then(res=>{
       //   console.log(res.data)
       //   this.docters=res.data;
@@ -180,7 +225,7 @@
       //   this.docters=res.data;
       // })
 
-      axios.get("api/hospital-search/searchall/"+this.params.page+"/"+this.params.size).then(res=>{
+      axios.get("api/hospital-search/searchall?page="+this.params.page+"&size="+this.params.size+"&department="+"&zhiwei=").then(res=>{
         this.docters=res.data.list;
         this.total=res.data.total;
       })
@@ -199,7 +244,7 @@
 
   #boday{
     width: 100%;
-    height: 1600px;
+    height: 100%;
   }
   .nav{
     min-width: 1200px;
@@ -343,7 +388,7 @@
   .tab-pannel {
     display: none;
   }
-  .filter-doc dl dd .tab-pannel li a {
+  .filter-doc dl dd .tab-pannel li div a {
     float: left;
     display: block;
     margin-right: 30px;
@@ -358,12 +403,7 @@
     color: #555;
     outline: none;
   }
-  .filter-doc dl dd .tab-pannel li a.cur {
-    padding: 0 5px;
-    border-radius: 5px;
-    background-color: #35818f;
-    color: #fff;
-  }
+
   .filter-doc dl+dl {
     border-top: 1px dashed rgba(53,129,143,0.2);
   }
@@ -406,13 +446,13 @@
   li {
     list-style: none;
   }
-  .filter-doc dl dd .tab-pannel li a.cur {
+  .filter-doc dl dd .tab-pannel li div a.cur {
     padding: 0 5px;
     border-radius: 5px;
     background-color: #35818f;
     color: #fff;
   }
-  .filter-doc dl dd .tab-pannel li a {
+  .filter-doc dl dd .tab-pannel li div a {
     float: left;
     display: block;
     margin-right: 30px;
