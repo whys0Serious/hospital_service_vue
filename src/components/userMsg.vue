@@ -139,7 +139,6 @@ export default{
         axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
             this.user=res.data;
             this.ruleForm=res.data;
-            console.log(res.data.userGender)
             this.value=res.data.userGender
         })
   },
@@ -149,7 +148,7 @@ export default{
 #contain{
   width: 100%;
   height: 100%;
-  background-color: #dcfcf9;
+  background-color: #f3eddf63;
   position: absolute;
   float: left;
 }
@@ -168,7 +167,7 @@ export default{
     width: 85%;
     height:90%;
     background-color: white;
-    margin-left: 10%;
+    margin-left: 7%;
     border-radius: 10px;
     margin-top: 30px;
   }

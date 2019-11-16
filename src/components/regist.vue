@@ -38,7 +38,7 @@
         <div class="main">
           <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item class="tel"  prop="username">
-              <el-input v-model="ruleForm.username" placeholder="请输入中文用户名"></el-input>
+              <el-input v-model="ruleForm.username" placeholder="请输入真实姓名"></el-input>
             </el-form-item>
             <el-form-item class="tel"  prop="userpass">
               <el-input type="password" placeholder="请输入密码" v-model="ruleForm.userpass" autocomplete="off"></el-input>
@@ -54,6 +54,9 @@
             </el-form-item>
             <el-form-item>
               <el-button type="primary" style="background-color: red;border: 0px" @click="submitForm('ruleForm')">提交注册</el-button>
+            </el-form-item>
+            <el-form-item>
+              <router-link to="/docRegist" ><el-button type="primary" style="background-color: #92b8d6;border: 0px;">医师注册</el-button></router-link>
             </el-form-item>
           </el-form>
         </div>
@@ -205,4 +208,5 @@ export default{
 </script>
 <style>
   @import "static/css/regist.css";
+
 </style>

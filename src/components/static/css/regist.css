@@ -8,7 +8,7 @@ html,body,.wrapper{
 	overflow: hidden;
 }
 .wrapper{
-	background-image: url("../img/bj.gif");
+	background-image: url("../img/beijing.jpg");
 	background-size: 100% 100%;
 	position: relative;
 }
@@ -48,7 +48,7 @@ article h1 em{display: inline-block;color:#5593ce;font-size: 25px;}
 .main{
 	padding: 40px 0px;
 	width: 100%;
-	background-color: rgba(24, 80, 137, 0.77);
+	background-color: #e4e7ed42;
 }
 form{
 	width: 397px;
@@ -72,6 +72,7 @@ footer{
 	font-size: 14px;
 	color: #5593ce;
 }
+
 .el-form-item {
   margin-bottom: 20px;
   margin-left: -82px;
