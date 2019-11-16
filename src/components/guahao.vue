@@ -50,7 +50,7 @@
               <i class="el-icon-first-aid-kit"></i>当前科室医生挂号排队人数：<span style="color: red">{{number}}</span>人
             </div>
             <div class="left_bottom">
-                <i class="el-icon-alarm-clock" style="float:left;margin-top: 4px;font-weight: bolder;margin-left: 10px">预计等待时间:</i>
+                <i class="el-icon-alarm-clock" style="float:left;margin-top: 4px;font-weight: bolder;margin-left: 80px">预计等待时间:</i>
                 <div v-if="this.number>10">
                   <span style="color: red;margin-left:-100px">一小时以上</span>
                 </div>
@@ -69,10 +69,10 @@
             </div>
             <div id="docMsg">
               <div id="dname">
-                <span style="margin-left:1px;font-size: large">医生姓名:{{doctor.docname}}</span>
+                <span style="margin-left:1px;font-size: large">医生姓名:{{doctor.docName}}</span>
               </div>
               <div id="dpic">
-                <img :src="doctor.docpic" style="width: 128px;height: 128px;border-radius: 100%;margin-top: 4px"/>
+                <img :src="doctor.docPic" style="width: 128px;height: 128px;border-radius: 100%;margin-top: 4px"/>
               </div>
             </div>
             <div class="right_level2">
@@ -93,7 +93,7 @@
             <hr/>
             <div id="right_bottom">
               <div id="little" style="margin-top: 70px"><span style="margin-left: 320px;font-size: smaller;text-align: center">消费结算</span></div>
-              <div id="sum"><span style="margin-left: 320px">小计:<span style="font-size:x-large;color: orangered;" >99999</span></span></div>
+              <div id="sum"><span style="margin-left: 320px">小计:<span style="font-size:x-large;color: orangered;margin-left: 10px" >{{price}}</span>元</span></div>
             </div>
           </div>
         </div>
@@ -125,8 +125,8 @@
             </div>
           <div id="b_bottom">
             <div id="button" style="margin-left: 600px;margin-top: 10px">
-              <span>总计：<span style="color: red;font-size: larger;font-weight: bolder">￥9999</span></span>
-              <button id="b_button">确认挂号</button> <button id="b_button2">取消挂号</button>
+              <span>总计：<span style="color: red;font-size: larger;font-weight: bolder">￥{{price}}</span></span>
+              <button id="b_button" @click="pay">确认挂号</button> <button id="b_button2"><router-link to="/">取消挂号</router-link></button>
             </div>
           </div>
         </div>
@@ -142,6 +142,7 @@
       return{
         time:'',
         flag:false,
+        price:'999',
         user:{},
         number:99,
         options: [{
@@ -154,10 +155,18 @@
           disabled: false
         }],
         shiduan:'',
-        doctor:{}
+        doctor:{
+          docName:"杨文武",
+          department:'肿瘤科',
+
+        },
+        order:{}
       }
     },
     methods:{
+        /*
+        * 注销
+        * */
       loginOut(){
         var id=this.$cookie.get("userMsg")
         axios.get("api/hospital-user-server/loginOut?id="+id).then(res=>{
@@ -168,8 +177,31 @@
         this.flag=false;
         this.$router.go(0)
       },
+      /*
+       * 发送支付请求
+       * */
+          pay(){
+            //为订单类赋值
+              this.order.userId=this.user.pkUid;
+              this.order.docName=this.doctor.docName
+              this.order.depName=this.doctor.department
+              this.order.price=this.price
+              axios.post("api/hospital-alipay-server/pay",this.order).then(res=>{
+                if(res.status==200){
+                  //重定向
+                  let routerData = this.$router.resolve({path:'/ApplyMark',query:{htmls:res.data}})
+                  this.htmls = res.data
+                  window.open(routerData.href,'_blank')
+                  const div = document.createElement('div');
+                  div.innerHTML = htmls;
+                  document.body.appendChild(div);
+                  document.forms [0] .submit();
+                }
+              })
+          }
     },
     mounted(){
+
       var id= this.$cookie.get("userMsg")
       axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
         this.user=res.data

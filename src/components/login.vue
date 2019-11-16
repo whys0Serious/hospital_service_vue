@@ -133,7 +133,7 @@
                 }else{
                     //验证成功将返回的信息存入cookie
                   var millisecond = new Date().getTime();
-                  var expiresTime = new Date(millisecond + 60 *1000*30);//获取当前时间，加上过期30分钟
+                  var expiresTime = new Date(millisecond + 60 *1000*120);//获取当前时间，加上过期120分钟
                       this.$cookie.set("userMsg",res.data,{
                         expires: expiresTime});
                   //返回首页
