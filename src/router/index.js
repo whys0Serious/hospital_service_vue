@@ -6,7 +6,6 @@ import regist from '@/components/regist'
 import login from '@/components/login'
 import zhineng from '@/components/zhineng'
 import userContainer from '@/components/userContainer'
-import nav from '@/components/nav'
 import userMsg from '@/components/userMsg'
 import userMedicalhistory from '@/components/userMedicalhistory'
 import guahao from '@/components/guahao'
@@ -14,6 +13,8 @@ import yanke from '@/components/yanke'
 import docter from '@/components/docter'
 import docterinfo from '@/components/docterinfo'
 import docterback from '@/components/docterback'
+import zuozhen from '@/components/zuozhen'
+import docwelcome from '@/components/docwelcome'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -63,11 +64,6 @@ export default new Router({
       component:userContainer
     },
     {
-      path:'/nav',
-      name:nav,
-      component:nav
-    },
-    {
       path:'/userMsg',
       name:'userMsg',
       component:userMsg
@@ -86,8 +82,16 @@ export default new Router({
       path: '/docterback',
       name: 'docterback',
       component: docterback,
-
+    },
+    {
+      path: '/docwelcome',
+      name: 'docwelcome',
+      component: docwelcome,
+    },
+    {
+      path: '/zuozhen',
+      name: 'zuozhen',
+      component: zuozhen,
     }
-
   ]
 })

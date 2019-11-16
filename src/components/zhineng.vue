@@ -1,5 +1,35 @@
 <template>
   <div>
+    <div id="whole">
+      <div id="shoulan">
+        <div id="juzhong">
+          <div id="logo"><img src="../components/static/img/logo.jpg" height="100%" width="100%" /></div>
+          <div class="search">
+            <el-autocomplete style="width: 70%;height: 100%" v-model="state" placeholder="请输入内容" @keydown.enter="handleSelect" ></el-autocomplete>
+            <el-button icon="el-icon-search" type="success" size="smile" circle @click="handleSelect"></el-button><br/>
+            <!--<div id="src"> <img src="https://shared-https.ydstatic.com/ke/web/v1.1.3/32aac580.png"/></div>-->
+            <span class="seafont">热门搜索：</span>
+            <span class="seafdata">感冒</span>
+          </div>
+          <!--登陆-->
+          <div class="userinfo">
+            <div v-if="flag">
+              <div class="userimg"><img :src="user.userPic" height="100%" width="100%" style="border-radius: 100%"/></div>
+              <div class="userimg_left">
+                <div style="float: right;width: 100%"><div style="margin-left: 30%"><span class="logsize">欢迎:</span><span class="logze">{{user.userName}} </span><span class="logsize"> 登陆平台</span></div></div>
+                <div class="info"><el-button type="danger"><router-link to="/userContainer">个人中心</router-link></el-button></div>
+                <div class="info"><el-button type="warning" @click="loginOut">注销登陆</el-button></div>
+              </div>
+            </div>
+            <div v-if="!flag">
+              <div class="info1"><el-button  type="warning"><router-link to="/regist">注册</router-link> </el-button></div>
+              <div class="info1"><el-button type="success"><router-link to="/login">登陆</router-link></el-button></div>
+              <div class="info1" style="line-height: 51px;font-size: large;color: #8b3200;font-weight:bolder;font-family:'Times New Roman',Times,serif;">游客您好！立即:</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="boday">
       <nav class="nav main-nav" id="nav">
         <ul class="nav-lists layout clearfix">
@@ -102,7 +132,10 @@
 
 
 <style >
-
+*{
+  padding: 0;
+  margin: 0;
+}
   #boday{
     width: 100%;
     height: 100%;

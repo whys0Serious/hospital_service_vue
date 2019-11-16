@@ -1,6 +1,38 @@
 <template>
 
   <div>
+    <div id="app">
+      <div id="whole">
+        <div id="shoulan">
+          <div id="juzhong">
+            <div id="logo"><img src="../components/static/img/logo.jpg" height="100%" width="100%" /></div>
+            <div class="search">
+              <el-autocomplete style="width: 70%;height: 100%" v-model="state" placeholder="请输入内容" @keydown.enter="handleSelect" ></el-autocomplete>
+              <el-button icon="el-icon-search" type="success" size="smile" circle @click="handleSelect"></el-button><br/>
+              <!--<div id="src"> <img src="https://shared-https.ydstatic.com/ke/web/v1.1.3/32aac580.png"/></div>-->
+              <span class="seafont">热门搜索：</span>
+              <span class="seafdata">感冒</span>
+            </div>
+            <!--登陆-->
+            <div class="userinfo">
+              <div v-if="flag">
+                <div class="userimg"><img :src="user.userPic" height="100%" width="100%" style="border-radius: 100%"/></div>
+                <div class="userimg_left">
+                  <div style="float: right;width: 100%"><div style="margin-left: 30%"><span class="logsize">欢迎:</span><span class="logze">{{user.userName}} </span><span class="logsize"> 登陆平台</span></div></div>
+                  <div class="info"><el-button type="danger"><router-link to="/userContainer">个人中心</router-link></el-button></div>
+                  <div class="info"><el-button type="warning" @click="loginOut">注销登陆</el-button></div>
+                </div>
+              </div>
+              <div v-if="!flag">
+                <div class="info1"><el-button  type="warning"><router-link to="/regist">注册</router-link> </el-button></div>
+                <div class="info1"><el-button type="success"><router-link to="/login">登陆</router-link></el-button></div>
+                <div class="info1" style="line-height: 51px;font-size: large;color: #8b3200;font-weight:bolder;font-family:'Times New Roman',Times,serif;">游客您好！立即:</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="boday">
       <nav class="nav main-nav" id="nav">
         <ul class="nav-lists layout clearfix">
@@ -31,24 +63,22 @@
             <dl>
               <dt>所在科室：</dt>
               <dd>
-                <ul class="tab-pannel" >
+                <ul class="tab-pannel">
                   <li >
-                    <div v-for="(target,id) in tagList" :key="id" @click="choseprofrom(id)">
-                      <a v-bind:class="{'cur':flag==id}" ><span>{{target.name}}</span></a>
-                    </div>
-                    <!--<a title="急诊科门诊" ><span>急诊科门诊</span></a>-->
-                    <!--<a title="眼科门诊"><span>眼科门诊</span></a>-->
-                    <!--<a title="心血管内科门诊"><span>心血管内科门诊</span></a>-->
-                    <!--<a title="神经内科门诊"><span>神经内科门诊</span></a>-->
-                    <!--<a title="消化科门诊"><span>消化科门诊</span></a>-->
-                    <!--<a title="儿科门诊"><span>儿科门诊</span></a>-->
-                    <!--<a title="呼吸内科"><span>呼吸内科</span></a>-->
-                    <!--<a title="耳鼻咽喉科"><span>耳鼻咽喉科</span></a>-->
-                    <!--<a title="泌尿外科"><span>泌尿外科</span></a>-->
-                    <!--<a title="口腔科门诊"><span>口腔科门诊</span></a>-->
-                    <!--<a title="妇产科门诊"><span>妇产科门诊</span></a>-->
-                    <!--<a title="肾病内分泌科"><span>肾病内分泌科</span></a>-->
-                    <!--<a title="肿瘤内科"><span>肿瘤内科</span></a>-->
+                    <a class="cur" title="全部" ><span>全部</span></a>
+                    <a title="急诊科门诊" ><span>急诊科门诊</span></a>
+                    <a title="眼科门诊"><span>眼科门诊</span></a>
+                    <a title="心血管内科门诊"><span>心血管内科门诊</span></a>
+                    <a title="神经内科门诊"><span>神经内科门诊</span></a>
+                    <a title="消化科门诊"><span>消化科门诊</span></a>
+                    <a title="儿科门诊"><span>儿科门诊</span></a>
+                    <a title="呼吸内科"><span>呼吸内科</span></a>
+                    <a title="耳鼻咽喉科"><span>耳鼻咽喉科</span></a>
+                    <a title="泌尿外科"><span>泌尿外科</span></a>
+                    <a title="口腔科门诊"><span>口腔科门诊</span></a>
+                    <a title="妇产科门诊"><span>妇产科门诊</span></a>
+                    <a title="肾病内分泌科"><span>肾病内分泌科</span></a>
+                    <a title="肿瘤内科"><span>肿瘤内科</span></a>
                   </li>
                 </ul>
               </dd>
@@ -59,14 +89,12 @@
               <dd>
                 <ul class="tab-pannel">
                   <li>
-                    <div v-for="(zw,ida) in zhiwei" :key="ida" @click="choseprofromZhi(ida)">
-                    <a v-bind:class="{'cur':fla==ida}"  ><span>{{zw.name}}</span></a>
-                    <!--<a ><span>主任医师</span></a>-->
-                    <!--<a ><span>副主任医师</span></a>-->
-                    <!--<a ><span>主治医师</span></a>-->
-                    <!--<a ><span>医师</span></a>-->
-                    <!--<a ><span>主任药师</span></a>-->
-                    </div>
+                    <a class="cur"><span>全部</span></a>
+                    <a ><span>主任医师</span></a>
+                    <a ><span>副主任医师</span></a>
+                    <a ><span>主治医师</span></a>
+                    <a ><span>医师</span></a>
+                    <a ><span>主任药师</span></a>
                   </li>
                 </ul>
               </dd>
@@ -131,65 +159,32 @@
 </template>
 
 <script>
-  import $ from 'jquery';
   import axios from 'axios'
   export default {
-
     data(){
       return{
-        flag: -1,
-        fla: -1,
-        tagList:[
-          {name:"全部",id:1,},{name:"急诊科门诊",id:2,},{name:"眼科门诊",id:3,},{name:"心血管内科门诊",id:4,},
-          {name:"神经内科门诊",id:5,},{name:"消化科门诊",id:6,},{name:"儿科门诊",id:7,},{name:"呼吸内科",id:8,},
-          {name:"泌尿外科",id:9,},{name:"口腔科门诊",id:10,},{name:"妇产科门诊",id:11,},{name:"肾病内分泌科",id:12,},{name:"肿瘤内科",id:13,},
-        ],
-        zhiwei:[
-          {name:"全部",ida:1,},{name:"主任医师",ida:2,},{name:"副主任医师",ida:3,},{name:"主治医师",ida:4,},
-          {name:"医师",ida:5,},{name:"主任药师",ida:6,},
-        ],
+        // flag: -1,
+        // tagList:[
+        //   {name:"全部",id:1,},{name:"急诊科门诊",id:2,},{name:"眼科门诊",id:3,},{name:"心血管内科门诊",id:4,},
+        //   {name:"神经内科门诊",id:5,},{name:"消化科门诊",id:6,},{name:"儿科门诊",id:7,},{name:"呼吸内科",id:8,},
+        //   {name:"泌尿外科",id:9,},{name:"口腔科门诊",id:10,},{name:"妇产科门诊",id:11,},{name:"肾病内分泌科",id:12,},{name:"肿瘤内科",id:13,},
+        // ],
         show: false,
         xhk:false,
         docters:[],
         total:this.total,
         params:{
           page:1,
-          size:12,
+          size:12
         },
+        flag:false,
+        user:[],
       }
     },
     methods:{
-      choseprofrom:function (id) {
-        this.flag = id;
-        var department=this.tagList[id].name;
-        var zhiwei=this.zhiwei[id].name;
-        if (department=="全部" && zhiwei=="全部"){
-          department=""
-          zhiwei=""
-        }
-        console.log(department)
-        var url="api/hospital-search/searchall?page="+this.params.page+"&size="+this.params.size+"&department="+department+"&zhiwei="
-        axios.get(url).then(res=>{
-          this.docters=res.data.list;
-          console.log(this.docters)
-          this.total=res.data.total;
-        })
-      },
-      choseprofromZhi:function (ida) {
-        this.fla = ida;
-        var department=this.tagList[ida].name;
-        var zhiwei=this.zhiwei[ida].name;
-        if (zhiwei=="全部" && zhiwei=="全部"){
-          // department=""
-          zhiwei=""
-        }
-        var url="api/hospital-search/searchall?page="+this.params.page+"&size="+this.params.size+"&department="+"&zhiwei="+zhiwei
-        axios.get(url).then(res=>{
-          this.docters=res.data.list;
-          console.log(this.docters)
-          this.total=res.data.total;
-        })
-      },
+      // choseprofrom:function (id) {
+      //   this.flag = id;
+      // },
       shouyea:function () {
         this.$router.push("/")
       },
@@ -201,21 +196,25 @@
         this.query();
       },
       query:function () {
-        var url="api/hospital-search/searchall?page="+this.params.page+"&size="+this.params.size+"&department="+"&zhiwei="
+        var url="api/hospital-search/searchall/"+this.params.page+"/"+this.params.size
         axios.get(url).then(res=>{
           this.docters=res.data.list;
           console.log(this.docters)
           this.total=res.data.total;
         })
       },
+      loginOut(){
+        var id=this.$cookie.get("userMsg")
+        axios.get("api/hospital-user-server/loginOut?id="+id).then(res=>{
+          this.$message.info("注销成功！")
+        })
+        this.$cookie.set("userMsg",id,{
+          expires:0})
+        this.flag=false;
+        this.$router.go(0)
+      }
     },
-
     mounted(){
-      // $(function(){
-      //   $(".tab-pannel li div a span").click(function () {
-      //     alert(2156)
-      //   })
-      // });
       // axios.get("api/hospital-search/createBase").then(res=>{
       //   console.log(res.data)
       //   this.docters=res.data;
@@ -225,7 +224,7 @@
       //   this.docters=res.data;
       // })
 
-      axios.get("api/hospital-search/searchall?page="+this.params.page+"&size="+this.params.size+"&department="+"&zhiwei=").then(res=>{
+      axios.get("api/hospital-search/searchall/"+this.params.page+"/"+this.params.size).then(res=>{
         this.docters=res.data.list;
         this.total=res.data.total;
       })
@@ -233,7 +232,14 @@
       //   this.docters=res.data.list;
       //   this.total=res.data.total;
       // })
-
+      var id= this.$cookie.get("userMsg")
+      axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
+        this.user=res.data
+        this.flag=true;
+      })
+      if(this.user!=null&&this.user!=""){
+        this.flag=false;
+      }
     }
   }
 
@@ -244,7 +250,7 @@
 
   #boday{
     width: 100%;
-    height: 100%;
+    height: 1600px;
   }
   .nav{
     min-width: 1200px;
@@ -388,7 +394,7 @@
   .tab-pannel {
     display: none;
   }
-  .filter-doc dl dd .tab-pannel li div a {
+  .filter-doc dl dd .tab-pannel li a {
     float: left;
     display: block;
     margin-right: 30px;
@@ -403,7 +409,12 @@
     color: #555;
     outline: none;
   }
-
+  .filter-doc dl dd .tab-pannel li a.cur {
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: #35818f;
+    color: #fff;
+  }
   .filter-doc dl+dl {
     border-top: 1px dashed rgba(53,129,143,0.2);
   }
@@ -446,13 +457,13 @@
   li {
     list-style: none;
   }
-  .filter-doc dl dd .tab-pannel li div a.cur {
+  .filter-doc dl dd .tab-pannel li a.cur {
     padding: 0 5px;
     border-radius: 5px;
     background-color: #35818f;
     color: #fff;
   }
-  .filter-doc dl dd .tab-pannel li div a {
+  .filter-doc dl dd .tab-pannel li a {
     float: left;
     display: block;
     margin-right: 30px;
@@ -667,5 +678,90 @@
     align-items: center;
     display: flex;
 
+  }
+  /*
+  头部
+  */
+  *{
+    padding:0;
+    margin: 0;
+  }
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+  #whole{
+    width: 100%;
+    height: 30%;
+    /*background-color: #f4f4f4;*/
+  }
+  #shoulan{
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+  #juzhong{
+    width: 85%;
+    margin: auto;
+    /*background-color: #3a8ee6;*/
+    height: 100%;
+  }
+  #logo{
+    width: 30%;
+    height: 100%;
+    float: left;
+  }
+  .search{
+    width: 40%;
+    height: 100%;
+    float: left;
+    margin-top: 2%;
+  }
+  .userinfo{
+    width: 30%;
+    height: 100%;
+    float: left;
+    /*background-color: #3a8ee6;*/
+  }
+  .userimg{
+    float: right;
+    margin-top: 1%;
+    width: 20%;
+    height: 20%;
+  }
+  .userimg_left{
+    float: left;
+    margin-top: 1%;
+    width: 80%;
+    height: 100%;
+  }
+  .info{
+    float: right;
+    margin-top: 3%;
+    margin-right: 4%;
+  }
+  .info1{
+    float: right;
+    margin-top: 8%;
+    margin-right: 4%;
+  }
+  .logsize{
+    color: #9fa6b0;
+  }
+  .logze{
+    color: #cc360c;
+    font-weight: bolder;
+  }
+  .seafont{
+    font-size: 13px;
+    float: left;
+    margin-left: 11%;
+  }
+  .seafdata{
+    font-size: 13px;
+    float: left;
   }
 </style>
