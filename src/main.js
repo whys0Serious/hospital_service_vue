@@ -3,13 +3,18 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+/*
+* 全局挂载cookie
+* */
+import VueCookies from 'vue-cookie'
+Vue.use(VueCookies)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: { App},
   template: '<App/>'
+
 })

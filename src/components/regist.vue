@@ -1,23 +1,42 @@
 <template>
   <div style="margin-top: 1%">
-
+    <div id="app">
+      <div id="whole">
+        <div id="shoulan">
+          <div id="juzhong">
+            <div id="logo"><img src="../components/static/img/logo.jpg" height="100%" width="100%" /></div>
+            <div class="search">
+              <el-autocomplete style="width: 70%;height: 100%" v-model="state" placeholder="请输入内容" @keydown.enter="handleSelect" ></el-autocomplete>
+              <el-button icon="el-icon-search" type="success" size="smile" circle @click="handleSelect"></el-button><br/>
+              <!--<div id="src"> <img src="https://shared-https.ydstatic.com/ke/web/v1.1.3/32aac580.png"/></div>-->
+              <span class="seafont">热门搜索：</span>
+              <span class="seafdata">感冒</span>
+            </div>
+            <!--登陆-->
+            <div class="userinfo">
+              <div v-if="flag">
+                <div class="userimg"><img :src="user.userPic" height="100%" width="100%" style="border-radius: 100%"/></div>
+                <div class="userimg_left">
+                  <div style="float: right;width: 100%"><div style="margin-left: 30%"><span class="logsize">欢迎:</span><span class="logze">{{user.userName}} </span><span class="logsize"> 登陆平台</span></div></div>
+                  <div class="info"><el-button type="danger">个人中心</el-button></div>
+                  <div class="info"><el-button type="warning" @click="loginOut">注销登陆</el-button></div>
+                </div>
+              </div>
+              <div v-if="!flag">
+                <div class="info1"><el-button  type="warning"><router-link to="/regist">注册</router-link> </el-button></div>
+                <div class="info1"><el-button type="success"><router-link to="/login">登陆</router-link></el-button></div>
+                <div class="info1" style="line-height: 51px;font-size: large;color: #8b3200;font-weight:bolder;font-family:'Times New Roman',Times,serif;">游客您好！立即:</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="wrapper">
       <article>
         <h1><span>健美医院注册中心</span></h1>
         <div class="main">
           <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-            <!--<el-form-item label="用户头像" prop="name">-->
-              <!--<el-upload-->
-                <!--v-loading="loading"-->
-                <!--class="avatar-uploader"-->
-                <!--action="api/hospital-user-server/uploadPic"-->
-                <!--:show-file-list="false"-->
-                <!--:on-success="handleAvatarSuccess"-->
-                <!--:before-upload="beforeAvatarUpload">-->
-                <!--<img v-if="userpic" :src="userpic" class="avatar">-->
-                <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
-              <!--</el-upload>-->
-            <!--</el-form-item>-->
             <el-form-item class="tel"  prop="username">
               <el-input v-model="ruleForm.username" placeholder="请输入中文用户名"></el-input>
             </el-form-item>
@@ -143,7 +162,9 @@ export default{
               { min: 11,max:11, message: '请输入正确的手机号码', trigger: 'blur' },
               { validator: checkPhone, trigger: 'blur'},
             ]
-          }
+          },
+          flag:false,
+          user:[],
         };
   },
   methods:{
@@ -169,6 +190,16 @@ export default{
       this.user.userpic=res
       this.loading=false
     },
+  }
+  ,
+  mounted(){
+    var id= this.$cookie.get("userMsg")
+    axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
+      this.user=res.data
+    })
+    if(this.user!=null&&this.user!=""){
+      this.flag=true;
+    }
   }
 }
 </script>

@@ -5,6 +5,11 @@ import index from '@/components/index'
 import regist from '@/components/regist'
 import login from '@/components/login'
 import zhineng from '@/components/zhineng'
+import userContainer from '@/components/userContainer'
+import nav from '@/components/nav'
+import userMsg from '@/components/userMsg'
+import userMedicalhistory from '@/components/userMedicalhistory'
+import guahao from '@/components/guahao'
 import yanke from '@/components/yanke'
 import docter from '@/components/docter'
 import docterinfo from '@/components/docterinfo'
@@ -51,6 +56,31 @@ export default new Router({
       path: '/docterinfo',
       name: 'docterinfo',
       component: docterinfo
+    },
+    {
+      path:'/userContainer',
+      name:'userContainer',
+      component:userContainer
+    },
+    {
+      path:'/nav',
+      name:nav,
+      component:nav
+    },
+    {
+      path:'/userMsg',
+      name:'userMsg',
+      component:userMsg
+    },
+    {
+      path:'/userMedicalhistory',
+      name:'userMedicalhistory',
+      component:userMedicalhistory
+    },
+    {
+      path:'/guahao',
+      name:'guahao',
+      component:guahao
     },
     {
       path: '/docterback',

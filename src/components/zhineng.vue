@@ -77,6 +77,9 @@
   export default {
     data(){
       return{
+
+      }
+      return{
         show: false,
         xhk:false,
       }
