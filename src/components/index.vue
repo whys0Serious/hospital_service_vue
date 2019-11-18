@@ -240,58 +240,22 @@
               </a>
             </div>
             <!--展示医生小卡片-->
-            <div class="card">
+            <div class="card" >
               <a href="" style="text-align: center">
-                <div class="card_dange">
-                  <span><img src="http://upload.409yy.com/2019/0318/20190318061338655.jpg" width="210" height="290"></span>
+                <div class="card_dange" v-for="doct in docters">
+                  <router-link :to="{name:'docterinfo',query:{did:doct.did}}">
+                  <span><img :src="doct.doc_pic" width="210" height="290"></span>
                   <div class="doc clearfix">
-                    <strong>严鸿林</strong>
-                    <u>主任医师</u>
+                    <strong>{{doct.doc_name}}</strong>
+                    <u>{{doct.zhicheng}}</u>
                   </div>
                   <div class="doc-dm">
-                    <a>消化内科</a>
+                    <a>{{doct.department}}</a>
                   </div>
+                  </router-link>
                 </div>
               </a>
 
-              <a href="" style="text-align: center">
-                <div class="card_dange">
-                  <span><img src="http://upload.409yy.com/2019/0318/20190318061338655.jpg" width="210" height="290"></span>
-                  <div class="doc clearfix">
-                    <strong>严鸿林</strong>
-                    <u>主任医师</u>
-                  </div>
-                  <div class="doc-dm">
-                    <a>消化内科</a>
-                  </div>
-                </div>
-              </a>
-
-              <a href="" style="text-align: center">
-                <div class="card_dange">
-                  <span><img src="http://upload.409yy.com/2019/0318/20190318061338655.jpg" width="210" height="290"></span>
-                  <div class="doc clearfix">
-                    <strong>严鸿林</strong>
-                    <u>主任医师</u>
-                  </div>
-                  <div class="doc-dm">
-                    <a>消化内科</a>
-                  </div>
-                </div>
-              </a>
-
-              <a href="" style="text-align: center">
-                <div class="card_dange">
-                  <span><img src="http://upload.409yy.com/2019/0318/20190318061338655.jpg" width="210" height="290"></span>
-                  <div class="doc clearfix">
-                    <strong>严鸿林</strong>
-                    <u>主任医师</u>
-                  </div>
-                  <div class="doc-dm">
-                    <a>消化内科</a>
-                  </div>
-                </div>
-              </a>
             </div>
             <el-pagination background layout="prev, pager, next" :page-size="this.params.size" v-on:current-change="changePage" :total="total" :current-page="this.params.page">
             </el-pagination>
@@ -323,12 +287,13 @@
         total:this.total,
         params:{
           page:1,
-          size:4
+          size:12
         },
         state:'',
         flag:false,
         user:[],
-        depatment:[]
+        depatment:[],
+        docters:[]
       }
     },
 
@@ -336,6 +301,13 @@
       changePage:function (e) {
         this.params.page=e
         this.query();
+      },
+      query(){
+        axios.get("api/hospital-indexshow/searchall?page="+this.params.page).then(res=>{
+          console.log(res.data)
+          this.docters=res.data.list;
+          this.total=res.data.total;
+        })
       },
       handleSelect(){
 
@@ -380,10 +352,7 @@
         this.depatment=res.data;
       })
 
-      axios.get("api/hospital-indexshow/searchall/"+this.params.page+"/"+this.params.size).then(res=>{
-        this.docters=res.data.list;
-        this.total=res.data.total;
-      })
+      this.query();
 
     },
   }

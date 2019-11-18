@@ -63,6 +63,9 @@
                         <a href="">{{docters.department}}
                         </a>
                       </p>
+                      <div class="caozuo">
+                        <img src="../components/static/img/shoucang.png" height="30" width="30"/>
+                      </div>
                     </div>
                     <div class="doc-resume">
                       <div class="doctor-img">
@@ -79,7 +82,7 @@
                       {{docters.specialty}}
                     </p>
                   </div>
-                  <router-link :to="{name:'guahao',query:{id:docters.did}}"><button>挂号</button></router-link>
+                  <router-link :to="{name:'guahao',query:{id:docters.did}}"></router-link>
                 </div>
                 <div class="clinic-and-news">
                   <div class="layout"></div>
@@ -557,5 +560,12 @@
   .seafdata{
     font-size: 13px;
     float: left;
+  }
+
+  .caozuo{
+    /*background-color: aquamarine;*/
+    width: 15%;
+    height: 30px;
+
   }
 </style>
