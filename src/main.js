@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 /*
 * 全局挂载cookie
 * */

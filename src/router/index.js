@@ -23,6 +23,33 @@ import ApplyMark from '@/components/ApplyMark'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import axios from 'axios'
+//后台管理
+import adddrug from '@/components/houtai/adddrug'
+import houtai from '@/components/houtai/index'
+import updatedrug from '@/components/houtai/updatedrug'
+import selectdrug from '@/components/houtai/selectdrug'
+import addpart from '@/components/houtai/addpart'
+import selectdepart from '@/components/houtai/selectdepart'
+import updatedepart from '@/components/houtai/updatedepart'
+import adddocshedule from '@/components/houtai/adddocshedule'
+import docshedule from '@/components/houtai/docshedule'
+import updatedocshedule from '@/components/houtai/updatedocshedule'
+import addocmsg from '@/components/houtai/addocmsg'
+import selectdocmsg from '@/components/houtai/selectdocmsg'
+import updatedoc from '@/components/houtai/updatedoc'
+import test from '@/components/houtai/test'
+import selectecharts from '@/components/houtai/selectecharts'
+import addlbtmsg from '@/components/houtai/addlbtmsg'
+import selectlbtmsg from '@/components/houtai/selectlbtmsg'
+import drugdetails from '@/components/houtai/drugdetails'
+import mychat from '@/components/houtai/mychat'
+import chatlogin from '@/components/houtai/chatlogin'
+import cureg from '@/components/houtai/cureg'
+import docreg from '@/components/houtai/docreg'
+import pinglundainzan from '@/components/houtai/pinglundainzan'
+import goeasy from '@/components/houtai/goeasy'
+import mq from '@/components/houtai/mq'
 
 
 Vue.use(Router)
@@ -128,6 +155,131 @@ export default new Router({
       name:'ApplyMark',
       component:ApplyMark
     },
+    {
+      path: '/houtai',
+      name: 'houtai',
+      component: houtai
+    },
+    {
+      path: '/adddrug',
+      name: 'adddrug',
+      component: adddrug
+    },
+    {
+      path: '/updatedrug',
+      name: 'updatedrug',
+      component: updatedrug
+    },
+    {
+      path: '/selectdrug',
+      name: 'selectdrug',
+      component: selectdrug
+    },
+    {
+      path: '/addpart',
+      name: 'addpart',
+      component: addpart
+    },
+    {
+      path: '/selectdepart',
+      name: 'selectdepart',
+      component: selectdepart
+    },
+    {
+      path: '/updatedepart',
+      name: 'updatedepart',
+      component: updatedepart
+    },
+    {
+      path: '/adddocshedule',
+      name: 'adddocshedule',
+      component: adddocshedule
+    },
+    {
+      path: '/docshedule',
+      name: 'docshedule',
+      component: docshedule
+    },
+    {
+      path: '/updatedocshedule',
+      name: 'updatedocshedule',
+      component: updatedocshedule
+    },
+    {
+      path: '/addocmsg',
+      name: 'addocmsg',
+      component: addocmsg
+    },
+    {
+      path: '/selectdocmsg',
+      name: 'selectdocmsg',
+      component: selectdocmsg
+    },
+    {
+      path: '/updatedoc',
+      name: 'updatedoc',
+      component: updatedoc
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
+    },
+    {
+      path: '/selectecharts',
+      name: 'selectecharts',
+      component: selectecharts
+    },
+    {
+      path: '/addlbtmsg',
+      name: 'addlbtmsg',
+      component: addlbtmsg
+    },
+    {
+      path: '/selectlbtmsg',
+      name: 'selectlbtmsg',
+      component: selectlbtmsg
+    },
+    {
+      path: '/drugdetails',
+      name: 'drugdetails',
+      component: drugdetails
+    },
+    {
+      path: '/mychat',
+      name: 'mychat',
+      component: mychat
+    },
+    {
+      path: '/chatlogin',
+      name: 'chatlogin',
+      component: chatlogin
+    },
+    {
+      path: '/cureg',
+      name: 'cureg',
+      component: cureg
+    },
+    {
+      path: '/docreg',
+      name: 'docreg',
+      component: docreg
+    },
+    {
+      path: '/pinglundainzan',
+      name: 'pinglundainzan',
+      component: pinglundainzan
+    },
+    {
+      path: '/goeasy',
+      name: 'goeasy',
+      component: goeasy
+    },
+    {
+      path: '/mq',
+      name: 'mq',
+      component: mq
+    }
 
 
 

@@ -67,7 +67,6 @@
 
 <script>
   import axios from 'axios'
-  import jquery from 'jquery'
 export default{
       data(){
         var checkName = (rule, value, callback) => {

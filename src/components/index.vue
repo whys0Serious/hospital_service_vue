@@ -313,6 +313,7 @@
   export default {
     data(){
       return{
+        state:'',
         items:[
           {src:'http://122.51.42.29:8888/group1/M00/00/00/rBEAEF3ItQ2AViJ5AAG27nlip7Y13..jpg'},
           {src:'http://122.51.42.29:8888/group1/M00/00/00/rBEAEF3ItZqAAoDhAAGcEU6POsI45..jpg'},
@@ -333,6 +334,12 @@
     },
 
     methods:{
+      handleSelect(){
+
+      },
+        keshi:function () {
+          this.$router.push("department")
+        },
       changePage:function (e) {
         this.params.page=e
         this.query();
