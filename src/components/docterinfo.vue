@@ -64,7 +64,8 @@
                         </a>
                       </p>
                       <div class="caozuo">
-                        <img src="../components/static/img/shoucang.png" height="30" width="30"/>
+                        <img v-if="indexx==false" src="../components/static/img/shoucangqian.png" @click="test(indexx)"  />
+                        <img v-if="indexx==true" src="../components/static/img/shoucang.png" @click="test(indexx)"  />
                       </div>
                     </div>
                     <div class="doc-resume">
@@ -133,6 +134,7 @@
   export default {
     data() {
       return {
+        indexx:false,  //没有收藏
         docters: {
           doc_name: '', department: '', zhicheng: '', doc_pic: '',specialty: '',did:''
         },
@@ -147,6 +149,16 @@
       },
       yisheng:function () {
         this.$router.push("docter")
+      },
+      test(indexx){
+        if (this.indexx == true) { //
+          // alert("取消收藏")
+          this.indexx = false;
+        } else { //
+          // alert("点击收藏")
+          this.indexx = true;
+        }
+
       },
       query(id){
         //根据查询医生详情
@@ -566,6 +578,9 @@
     /*background-color: aquamarine;*/
     width: 15%;
     height: 30px;
-
+  }
+  .caozuo img{
+    height: 30px;
+    width:30px;
   }
 </style>
