@@ -18,7 +18,15 @@
               <div class="userimg"><img :src="user.userPic" height="100%" width="100%" style="border-radius: 100%"/></div>
               <div class="userimg_left">
                 <div style="float: right;width: 100%"><div style="margin-left: 30%"><span class="logsize">欢迎:</span><span class="logze">{{user.userName}} </span><span class="logsize"> 登陆平台</span></div></div>
-                <div class="info"><el-button type="danger"><router-link to="/userContainer">个人中心</router-link></el-button></div>
+                <div v-if="(user.identity)==('用户')">
+                  <div class="info"><el-button type="danger"><router-link to="/userContainer">个人中心</router-link></el-button></div>
+                </div>
+                <div v-if="(user.identity)==('医生')">
+                  <div class="info"><el-button type="danger"><router-link to="/docterback">就诊平台</router-link></el-button></div>
+                </div>
+                <div v-if="(user.identity)==('管理员')">
+                  <div class="info"><el-button type="danger"><router-link to="/">后台管理</router-link></el-button></div>
+                </div>
                 <div class="info"><el-button type="warning" @click="loginOut">注销登陆</el-button></div>
               </div>
             </div>
@@ -52,13 +60,13 @@
             <div class="left_bottom">
                 <i class="el-icon-alarm-clock" style="float:left;margin-top: 4px;font-weight: bolder;margin-left: 80px">预计等待时间:</i>
                 <div v-if="this.number>10">
-                  <span style="color: red;margin-left:-100px">一小时以上</span>
+                  <span style="color: red;margin-left:50px">一小时以上</span>
                 </div>
               <div v-if="this.number<10&&this.number>1">
-                <span style="color: red;float:left;margin-left: -100px">半个小时之内</span>
+                <span style="color: red;float:left;margin-left:50px">半个小时之内</span>
               </div>
               <div v-if="this.number==0">
-                <span style="color: red;float:left;margin-left: -100px">立即就诊</span>
+                <span style="color: red;float:left;margin-left: 50px">立即就诊</span>
               </div>
               </div>
 
@@ -142,9 +150,9 @@
       return{
         time:'',
         flag:false,
-        price:'999',
+        price:'',
         user:{},
-        number:99,
+        number:0,
         options: [{
           shiduan: '上午',
           label: '上午',
@@ -156,8 +164,8 @@
         }],
         shiduan:'',
         doctor:{
-          docName:"杨文武",
-          department:'肿瘤科',
+          docName:"",
+          department:'',
 
         },
         order:{}
@@ -214,6 +222,25 @@
       /*
       * 查询医生信息
       * */
+      var did=this.$route.query.id;
+      axios.get("api/hospital-registered-server/findDocMsg?did="+did).then(res=>{
+        this.doctor=res.data;
+        /*
+         * 查询价格
+         * */
+        axios.get("api/hospital-registered-server/findPrice?depname="+this.doctor.department).then(res=>{
+          this.price=res.data;
+        })
+        /*
+        * 挂号人数
+        * */
+        axios.get("api/hospital-alipay-server/showNums?depart="+this.doctor.department+"&doc="+this.doctor.docName).then(res=>{
+          if(res.data!=""){
+            this.number=res.data;
+          }
+
+        })
+    })
 
     },
   }

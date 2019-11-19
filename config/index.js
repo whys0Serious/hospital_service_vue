@@ -11,7 +11,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-
       '/api': {
         target: 'http://localhost:8100/', //你真正的请求路径
         changeOrigin: true,  //打开跨域
@@ -25,7 +24,7 @@ module.exports = {
     host: 'localhost', // can be overwritten by process.env.HOST
     //其他服务端口围绕在8000-9000，所以修改出掉之前的9100
     port: 1100, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: false,
+    autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-

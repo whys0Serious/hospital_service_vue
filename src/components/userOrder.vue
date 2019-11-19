@@ -74,12 +74,8 @@
               order:[],
             pageBean:{
               page:1,
-              size:2,
+              size:5,
               id:''
-            },
-            payBack:{
-                  userId:'',
-                  orderNum:''
             },
             backOrder:{},
             total:0
@@ -100,6 +96,9 @@
           this.pageBean.page=i;
           this.query();
       },
+      /*
+       * 查询订单
+       * */
       query(){
         axios.post('api/hospital-alipay-server/showOrderByPage',this.pageBean).then(res=>{
           this.order=res.data.list;
@@ -128,18 +127,8 @@
       }
     },
     mounted(){
-      /*
-       * 先从cookie中获取用户          * */
       this.pageBean.id=this.$cookie.get("userMsg");
       this.query();
-      /*
-      * 支付成功回调时修改订单状态
-      * */
-      this.payBack.orderNum=this.$route.query.out_trade_no;
-      this.payBack.userId=this.pageBean.id
-      axios.post("api/hospital-alipay-server/payback",this.payBack).then(res=>{
-          this.$message.success("挂号成功！")
-      })
     }
   }
 </script>

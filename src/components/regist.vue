@@ -18,7 +18,15 @@
                 <div class="userimg"><img :src="user.userPic" height="100%" width="100%" style="border-radius: 100%"/></div>
                 <div class="userimg_left">
                   <div style="float: right;width: 100%"><div style="margin-left: 30%"><span class="logsize">欢迎:</span><span class="logze">{{user.userName}} </span><span class="logsize"> 登陆平台</span></div></div>
-                  <div class="info"><el-button type="danger">个人中心</el-button></div>
+                  <div v-if="(user.identity)==('用户')">
+                    <div class="info"><el-button type="danger"><router-link to="/userContainer">个人中心</router-link></el-button></div>
+                  </div>
+                  <div v-if="(user.identity)==('医生')">
+                    <div class="info"><el-button type="danger"><router-link to="/docterback">就诊平台</router-link></el-button></div>
+                  </div>
+                  <div v-if="(user.identity)==('管理员')">
+                    <div class="info"><el-button type="danger"><router-link to="/">后台管理</router-link></el-button></div>
+                  </div>
                   <div class="info"><el-button type="warning" @click="loginOut">注销登陆</el-button></div>
                 </div>
               </div>
@@ -36,24 +44,24 @@
       <article>
         <h1><span>健美医院注册中心</span></h1>
         <div class="main">
-          <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+          <el-form :model="ruleForms" status-icon :rules="rules" ref="ruleForms" label-width="100px" class="demo-ruleForm">
             <el-form-item class="tel"  prop="username">
-              <el-input v-model="ruleForm.username" placeholder="请输入真实姓名"></el-input>
+              <el-input v-model="ruleForms.username" placeholder="请输入真实姓名"></el-input>
             </el-form-item>
             <el-form-item class="tel"  prop="userpass">
-              <el-input type="password" placeholder="请输入密码" v-model="ruleForm.userpass" autocomplete="off"></el-input>
+              <el-input type="password" placeholder="请输入密码" v-model="ruleForms.userpass" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item  prop="checkPass">
-              <el-input type="password" placeholder="确认密码" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+              <el-input type="password" placeholder="确认密码" v-model="ruleForms.checkPass" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item class="tel" prop="usermail">
-              <el-input v-model="ruleForm.usermail"  placeholder="请输入有效邮箱地址"></el-input>
+              <el-input v-model="ruleForms.usermail"  placeholder="请输入有效邮箱地址"></el-input>
             </el-form-item>
             <el-form-item class="tel"  prop="userphone">
-              <el-input v-model="ruleForm.userphone" type="number"  placeholder="请输入有效手机号码"></el-input>
+              <el-input v-model="ruleForms.userphone" type="number"  placeholder="请输入有效手机号码"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" style="background-color: red;border: 0px" @click="submitForm('ruleForm')">提交注册</el-button>
+              <el-button type="primary" style="background-color: red;border: 0px" @click="submitForm('ruleForms')">提交注册</el-button>
             </el-form-item>
             <el-form-item>
               <router-link to="/docRegist" ><el-button type="primary" style="background-color: #92b8d6;border: 0px;">医师注册</el-button></router-link>
@@ -67,7 +75,6 @@
 
 <script>
   import axios from 'axios'
-  import jquery from 'jquery'
 export default{
       data(){
         var checkName = (rule, value, callback) => {
@@ -102,7 +109,7 @@ export default{
             callback(new Error('请输入密码'));
           } else {
             if (this.checkPass !== '') {
-              this.$refs.ruleForm.validateField('checkPass');
+              this.$refs.ruleForms.validateField('checkPass');
             }
             callback();
           }
@@ -110,7 +117,7 @@ export default{
         var validatePass2 = (rule, value, callback) => {
           if (value === '') {
             callback(new Error('请再次输入密码'));
-          } else if (value !== this.ruleForm.userpass) {
+          } else if (value !== this.ruleForms.userpass) {
             callback(new Error('两次输入密码不一致!'));
           } else {
             callback();
@@ -131,7 +138,7 @@ export default{
         };
 
         return{
-          ruleForm:{
+          ruleForms:{
               userpass:'',
               username:'',
               usermail:'',
@@ -139,7 +146,7 @@ export default{
             checkPass:'',
             userpic:''
           },
-          user:{
+          userR:{
             userName:'',
             userMail:'',
             userPass:'',
@@ -168,6 +175,7 @@ export default{
           },
           flag:false,
           user:[],
+          count:'',//倒计时
         };
   },
   methods:{
@@ -175,23 +183,48 @@ export default{
         console.log(this.$refs[formName])
         this.$refs[formName].validate((valid)=>{
             if(valid){
-              this.user.userPass=this.ruleForm.userpass
-              this.user.userName=this.ruleForm.username
-              this.user.userMail=this.ruleForm.usermail
-              this.user.userPhone=this.ruleForm.userphone
-              axios.post("api/hospital-user-server/regist",this.user).then(res=>{
-                  alert("提交成功！")
+              this.userR.userPass=this.ruleForms.userpass
+              this.userR.userName=this.ruleForms.username
+              this.userR.userMail=this.ruleForms.usermail
+              this.userR.userPhone=this.ruleForms.userphone
+              axios.post("api/hospital-user-server/regist",this.userR).then(res=>{
+                this.$notify({
+                  title: '注册成功',
+                  message: '请前往注册邮箱进行激活后登录,3秒后跳转至登录页面',
+                  duration: 3000
+                });
+                this.goGrdoupRecor();
               })
             }else{
-                alert("请填写正确的个人信息！!")
+                this.$message.error("请填写正确的个人信息！!")
             }
             return false;
         })
     },
     handleAvatarSuccess(res, file) {
       this.userpic = URL.createObjectURL(file.raw);
-      this.user.userpic=res
+      this.userR.userpic=res
       this.loading=false
+    },
+
+    goGrdoupRecor(){
+        //三秒后进入登陆页面
+      const TIME_COUNT = 3;
+      if(!this.timer){
+        this.count = TIME_COUNT;
+        this.show = false;
+        this.timer = setInterval(()=>{
+          if(this.count > 0 && this.count <= TIME_COUNT){
+            this.count--;
+          }else{
+            this.show = true;
+            clearInterval(this.timer);
+            this.timer = null;
+            //跳转的页面写在此处
+            this.$router.push("/login");
+          }
+        },1000)
+      }
     },
   }
   ,

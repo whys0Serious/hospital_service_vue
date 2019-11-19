@@ -18,7 +18,15 @@
                 <div class="userimg"><img :src="user.userPic" height="100%" width="100%" style="border-radius: 100%"/></div>
                 <div class="userimg_left">
                   <div style="float: right;width: 100%"><div style="margin-left: 30%"><span class="logsize">欢迎:</span><span class="logze">{{user.userName}} </span><span class="logsize"> 登陆平台</span></div></div>
-                  <div class="info"><el-button type="danger"><router-link to="/userContainer">个人中心</router-link></el-button></div>
+                  <div v-if="(user.identity)==('用户')">
+                    <div class="info"><el-button type="danger"><router-link to="/userContainer">个人中心</router-link></el-button></div>
+                  </div>
+                  <div v-if="(user.identity)==('医生')">
+                    <div class="info"><el-button type="danger"><router-link to="/docterback">就诊平台</router-link></el-button></div>
+                  </div>
+                  <div v-if="(user.identity)==('管理员')">
+                    <div class="info"><el-button type="danger"><router-link to="/">后台管理</router-link></el-button></div>
+                  </div>
                   <div class="info"><el-button type="warning" @click="loginOut">注销登陆</el-button></div>
                 </div>
               </div>

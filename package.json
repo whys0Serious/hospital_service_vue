@@ -11,11 +11,19 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "echarts": "^4.4.0",
     "element-ui": "^2.12.0",
+    "file-saver": "^2.0.2",
+    "goeasy": "^1.0.3",
     "jquery": "^3.4.1",
+    "video.js": "^7.6.5",
     "vue": "^2.5.2",
     "vue-cookie": "^1.1.4",
-    "vue-router": "^3.0.1"
+    "vue-echarts": "^4.0.4",
+    "vue-json-excel": "^0.2.98",
+    "vue-router": "^3.0.1",
+    "vue-video-player": "^5.0.2",
+    "xlsx": "^0.15.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -42,6 +50,7 @@
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
+    "script-loader": "^0.7.2",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
