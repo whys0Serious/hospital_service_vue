@@ -23,7 +23,7 @@
         </el-submenu>
       </el-submenu>
       <el-menu-item index="3" disabled>消息中心</el-menu-item>
-      <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+      <el-menu-item index="4"><router-link to="/">回到首页</router-link></el-menu-item>
     </el-menu>
     <div style="float: left;height: 550px;overflow: auto" >
       <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">

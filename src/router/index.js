@@ -51,6 +51,7 @@ import pinglundainzan from '@/components/houtai/pinglundainzan'
 import goeasy from '@/components/houtai/goeasy'
 import mq from '@/components/houtai/mq'
 import poi from '@/components/houtai/poi'
+import docRegist from '@/components/docRegist'
 
 
 Vue.use(Router)
@@ -62,6 +63,11 @@ export default new Router({
       path: '/',
       name: 'index',
       component: index
+    },
+    {
+      path:'/docRegist',
+      name:'docRegist',
+      component:docRegist
     },
     {
       path:'/regist',

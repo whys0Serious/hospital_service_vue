@@ -8,9 +8,9 @@
           <div class="msg">
             <img src="../components/static/img/xiaomi.png" />
           </div>
-          <div class="docname"><p style="color: white">张小米</p></div>
+          <div class="docname"><p style="color: white">{{doc.userName}}</p></div>
           <div class="docimg">
-            <el-avatar :size="50" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
+            <el-avatar :size="50"><img :src="doc.userPic"/></el-avatar>
           </div>
     </div>
     <div class="body">
@@ -47,7 +47,7 @@
           </el-menu-item>
           <el-menu-item index="6">
             <i class="el-icon-setting"></i>
-            <span slot="title">导航六</span>
+            <span slot="title" @click="goback">返回首页</span>
           </el-menu-item>
           <div class="foot">
 
@@ -66,9 +66,19 @@
 </template>
 
 <script>
+  import axios from  'axios'
   export default {
+      data(){
+          return{
+              doc:{}
+          }
+      },
     mounted(){
-
+        //查询医生信息
+      var id=this.$cookie.get("userMsg");
+      axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
+            this.doc=res.data;
+      })
     },
     methods: {
       handleOpen(key, keyPath) {
@@ -82,6 +92,9 @@
       },
       forindex(){
         document.getElementById("scor").src="http://localhost:1100/#/docwelcome"
+      },
+      goback(){
+       this.$router.push("/")
       }
     }
   }
@@ -157,5 +170,12 @@
     width: 100%;
     height: 300px;
     background-color: #2f363e;
+  }
+  .el-avatar>img {
+    display: block;
+    height: 100%;
+    vertical-align: middle;
+    width: 56px;
+    height: 77px;
   }
 </style>
