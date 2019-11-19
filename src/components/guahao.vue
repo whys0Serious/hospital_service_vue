@@ -209,7 +209,6 @@
           }
     },
     mounted(){
-
       var id= this.$cookie.get("userMsg")
       axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
         this.user=res.data
@@ -217,6 +216,10 @@
       })
       if(this.user!=null&&this.user!=""){
         this.flag=false;
+      }
+      if(id==null||id==""){
+          this.$router.push("/")
+        this.$message.error("请登陆后继续操作！")
       }
 
       /*
@@ -234,12 +237,18 @@
         /*
         * 挂号人数
         * */
-        axios.get("api/hospital-alipay-server/showNums?depart="+this.doctor.department+"&doc="+this.doctor.docName).then(res=>{
-          if(res.data!=""){
-            this.number=res.data;
-          }
-
+        axios.get("api/hospital-alipay-server/showNowNums?depart="+this.doctor.department+"&doc="+this.doctor.docName).then(res=>{
+            if(res.data!=""){
+                this.number=res.data;
+            }else{
+              axios.get("api/hospital-alipay-server/showNums?depart="+this.doctor.department+"&doc="+this.doctor.docName).then(res=>{
+                if(res.data!=""){
+                  this.number=res.data;
+                }
+              })
+            }
         })
+
     })
 
     },
