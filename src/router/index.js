@@ -50,6 +50,7 @@ import docreg from '@/components/houtai/docreg'
 import pinglundainzan from '@/components/houtai/pinglundainzan'
 import goeasy from '@/components/houtai/goeasy'
 import mq from '@/components/houtai/mq'
+import poi from '@/components/houtai/poi'
 
 
 Vue.use(Router)
@@ -279,6 +280,11 @@ export default new Router({
       path: '/mq',
       name: 'mq',
       component: mq
+    },
+    {
+      path: '/poi',
+      name: 'poi',
+      component: poi
     }
 
 

@@ -1,5 +1,16 @@
 <template>
   <div>
+    <el-row>
+      <download-excel
+        style="width: 100px;background-color: #8EC172"
+        class = "export-excel-wrapper"
+        :data = "docshedule"
+        name = "排班详单.xls">
+        <el-button>
+          导出
+        </el-button>
+      </download-excel>
+    </el-row>
     <el-table
       :data="docshedule"
       style="width: 100%">

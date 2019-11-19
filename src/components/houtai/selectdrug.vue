@@ -1,5 +1,15 @@
 <template>
   <div >
+    <download-excel
+      class = "export-excel-wrapper"
+      :data = "drugmsg"
+      style="width: 100px;background-color: #8EC172"
+      name = "药品详单.xls">
+      <el-button class="el-icon-document">
+        导出
+      </el-button>
+    </download-excel>
+    <el-divider></el-divider>
     <el-table :data="drugmsg" style="width: 100%">
       <el-table-column
         type="index"
@@ -47,11 +57,6 @@
             size="mini"
             type="danger"
             @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
-          <el-button
-            size="mini"
-            type="primary"
-            class="el-icon-document"
-            @click="handledaochu(scope.row)">导出</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -69,7 +74,12 @@
 </template>
 <script>
   import axios from 'axios'
+  import ElButton from "../../../node_modules/element-ui/packages/button/src/button";
+  import ElDivider from "../../../node_modules/element-ui/packages/divider/src/main";
   export default{
+    components: {
+      ElDivider,
+      ElButton},
     data(){
           return{
             total:100,
@@ -86,7 +96,6 @@
         this.selectall()
       },
       handleCurrentChange(val){
-          alert(1)
         this.page=val
         this.selectall()
       },

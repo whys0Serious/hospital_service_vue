@@ -1,5 +1,16 @@
 <template>
   <div>
+    <el-row>
+      <download-excel
+        class = "export-excel-wrapper"
+        :data = "DocMsg"
+        style="width: 100px;background-color: #8EC172"
+        name = "医生详单.xls">
+        <el-button>
+          导出
+        </el-button>
+      </download-excel>
+    </el-row>
       <el-drawer
         title="医生资格审核"
         style="height: 150px"

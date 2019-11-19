@@ -83,7 +83,7 @@
               <div class="diff-news-box diff-news-box-slick slick-initialized slick-slider slick-dotted" role="toolbar">
                 <div class="slick-list draggable" aria-live="polite">
                   <el-carousel height="380px" >
-                    <el-carousel-item v-for="item in 4" :key="item">
+                    <el-carousel-item v-for="item in " :key="item">
                       <h3 class="small">{{ item }}</h3>
                     </el-carousel-item>
                   </el-carousel>
