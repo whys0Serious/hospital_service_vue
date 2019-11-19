@@ -2,65 +2,75 @@
   <div id="body">
     <div id="topp">
       <div class="user">
-          <img :src="userMsg.userPic" height="120" width="120" />
-          <span style="position: absolute;top: 32%;left: 7%;">{{userMsg.userName}}</span>
-          <span style="position: absolute;top: 37%;left: 6%;">{{userMsg.userPhone}}</span>
-          <span style="position: absolute;top: 42%;left: 9%;">{{userMsg.userAge}}<span>岁</span></span>
-          <span style="position: absolute;top: 47%;left: 9%;">{{userMsg.userGender}}</span>
+          <img src="../components/static/img/userlogo.jpg" height="120" width="120" />
+          <span style="position: absolute;top: 32%;left: 7%;">zhangxiaomi</span>
+          <span style="position: absolute;top: 37%;left: 6%;">13772692011</span>
+          <span style="position: absolute;top: 42%;left: 9%;">42<span>岁</span></span>
+          <span style="position: absolute;top: 47%;left: 9%;">男</span>
       </div>
       <div class="bingli">
-        <div v-for="item in form">
         <div class="bingl">
-          <a  @click="showHistory(item.pkMid)">
+          <a  @click="dialogFormVisible  = true">
           <div class="newdate">
-            <p style="font-size: 40px;color: rgba(54,130,144,0.5);font-weight: 700;">{{item.gmtCreate}}</p>
-            <p>{{item.gmtModified}}</p>
+            <p style="font-size: 40px;color: rgba(54,130,144,0.5);font-weight: 700;">06</p>
+            <p>2019-10</p>
           </div>
           <div class="bl">
-            <p style="position: relative;top: 4%">{{item.diseaseName}}</p>
-            <p style="position: relative;top: 8%;color: #b7b7b7;text-overflow: ellipsis;">{{item.diseaseInfo}}</p>
+            <p style="position: relative;top: 4%">撞伤伤口感染发烧</p>
+            <p style="position: relative;top: 8%;color: #b7b7b7;text-overflow: ellipsis;">意外撞伤后，未及时处理伤口，加上偶感风寒，导致病灶转移至全身，左手处有明显淤青意外撞伤后，未及时处理伤口，意外撞伤后，未及时处理伤口，，</p>
           </div>
           </a>
-        </div>
         </div>
       </div>
       <div class="jiaohao">
         <ul style="list-style-type: none">
-          <li>已预约人数：<span>{{sumNum}}</span></li>
+          <li>已预约人数：<span>50</span></li>
           <li>剩余排号人数：<span>30</span></li>
         </ul>
       </div>
     </div>
     <div id="fott" >
       <el-button type="primary" >呼叫下一位</el-button>
-      <el-button type="success" @click="next">切换下一位</el-button>
-      <el-button type="danger">添加病例</el-button>
+      <el-button type="success">切换下一位</el-button>
+      <el-button type="danger" @click="FormVisible  = true">添加病例</el-button>
       <el-button type="warning">开处方</el-button>
     </div>
 
+
+
+
+
+
+
     <!--编辑界面-->
     <el-dialog title="病人病历" :visible.sync="dialogFormVisible">
-      <el-form :model="this.history">
+      <el-form :model="form">
+        <el-form-item label="病人名称" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
         <el-form-item label="就诊医生" :label-width="formLabelWidth">
-          <el-input v-model="history.docName" autocomplete="off" :disabled="true"></el-input>
+          <el-input v-model="form.doc_name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="病人性别" :label-width="formLabelWidth">
+          <el-input v-model="form.userGender" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="就诊门诊" :label-width="formLabelWidth">
-          <el-input v-model="history.department" autocomplete="off" :disabled="true"></el-input>
+          <el-input v-model="form.department" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="疾病名称" :label-width="formLabelWidth">
-          <el-input v-model="history.diseaseName" autocomplete="off" :disabled="true"></el-input>
+          <el-input v-model="form.jibingname" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="使用的药品" :label-width="formLabelWidth">
-          <el-input v-model="history.drugName" autocomplete="off" :disabled="true"></el-input>
+          <el-input v-model="form.yaopin" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="医生医嘱" :label-width="formLabelWidth">
-          <el-input v-model="history.docAdvice" autocomplete="off" :disabled="true"></el-input>
+          <el-input v-model="form.yizhu" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="药单价格" :label-width="formLabelWidth">
-          <el-input v-model="history.drugPrice" autocomplete="off" :disabled="true"></el-input>
+          <el-input v-model="form.price" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="创建时间" :label-width="formLabelWidth">
-          <el-input v-model="history.gmtCreate" autocomplete="off" :disabled="true"></el-input>
+          <el-input v-model="form.data" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -107,7 +117,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     data(){
       return{
@@ -136,9 +145,8 @@
           price:'',  //药品消费价格
           // data:'2019-09-30',  //创建时间  由后台创建当前时间
         },
-        form:[],
-        history:[],
         dialogFormVisible: false,
+        FormVisible:false,
         formLabelWidth: '120px',
         //编辑界面数据
         editForm: {
@@ -148,67 +156,13 @@
           desc: '',
           reserve:'',
         },
-        doc:{},//医生信息
-        num:'',//排号计数
-        sumNum:'',//总排号人数
-        nowNum:'',//当前剩余人数
-        userMsg:''//当前就诊人信息
       }
     },
     mounted(){
-      //查询当前第一位排号人信息
-      //先获得当前医生信息
-      var id= this.$cookie.get("userMsg")
-      axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
-       var did=res.data.pkDocid;
-       axios.get("api/hospital-registered-server/findDocMsg?did="+did).then(res=>{
-          this.doc=res.data
-         //获取当前科室所有排号数
-         axios.get("api/hospital-alipay-server/showNums?depart="+this.doc.department+"&doc="+this.doc.docName).then(res=>{
-           this.sumNum=res.data;
-         })
-         axios.get("api/hospital-alipay-server/showNumUser?depart="+this.doc.department+"&docName="+this.doc.docName+"&num=1").then(res=>{
-           this.userMsg=res.data;
-           this.num=1;
-           this.query();
-         })
-        })
-      })
-
 
     },
     methods: {
-      next(){
-        this.num+=1;
-        alert(this.num);
-        axios.get("api/hospital-alipay-server/showNumUser?depart="+this.doc.department+"&docName="+this.doc.docName+"&num="+this.num).then(res=>{
-            this.userMsg=res.data;
-            this.query();
-        })
-      },
-      query(){//查询当前病人所有病历
-        axios.get("api/hospital-registered-server/showHistory?id="+this.userMsg.pkUid).then(res=>{
-          for(var i=0;i<res.data.length;i++){
-            if(res.data[i].gmtCreate!=null){
-              var d=new Date(res.data[i].gmtCreate);
-//              res.data[i].gmtCreate=d.getFullYear() + '-' + (d.getMonth() + 1)
-//                + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-              res.data[i].gmtModified=d.getFullYear()+"-"+(d.getMonth()+1)
-              res.data[i].gmtCreate=d.getDate();
-            }
-          }
-          this.form=res.data;
-        })
-      },
-      showHistory(i){//查询每一条具体病历详情；
-          axios.get("api/hospital-registered-server/showOneHistory?mid="+i).then(res=>{
-            var d=new Date(res.data.gmtCreate);
-            res.data.gmtCreate=d.getFullYear() + '-' + (d.getMonth() + 1)
-                + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-              this.history=res.data;
-          })
-        this.dialogFormVisible= true;
-      }
+
     }
   }
 

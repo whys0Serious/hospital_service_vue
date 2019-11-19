@@ -170,7 +170,6 @@
           // alert("点击收藏")
           var userid= this.$cookie.get("userMsg")
           var docid=this.docters.did
-
           axios.post("api/hospital-indexshow/insert/"+userid+"/"+docid).then(res=>{
             this.docters=res.data;
           })
