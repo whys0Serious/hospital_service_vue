@@ -52,6 +52,7 @@ import mq from '@/components/houtai/mq'
 import yishengzhuce from '@/components/houtai/yishengzhuce'
 import docRegist from '@/components/docRegist'
 import shipin from '@/components/houtai/shipin'
+import tianjiaguanliyuan from '@/components/houtai/tianjiaguanliyuan'
 
 
 Vue.use(Router)
@@ -291,9 +292,11 @@ export default new Router({
       path: '/shipin',
       name: 'shipin',
       component: shipin
+    },
+    {
+      path: '/tianjiaguanliyuan',
+      name: 'tianjiaguanliyuan',
+      component: tianjiaguanliyuan
     }
-
-
-
   ]
 })
