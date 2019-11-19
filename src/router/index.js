@@ -48,7 +48,6 @@ import chatlogin from '@/components/houtai/chatlogin'
 import cureg from '@/components/houtai/cureg'
 import docreg from '@/components/houtai/docreg'
 import pinglundainzan from '@/components/houtai/pinglundainzan'
-import goeasy from '@/components/houtai/goeasy'
 import mq from '@/components/houtai/mq'
 import poi from '@/components/houtai/poi'
 import docRegist from '@/components/docRegist'
@@ -276,11 +275,6 @@ export default new Router({
       path: '/pinglundainzan',
       name: 'pinglundainzan',
       component: pinglundainzan
-    },
-    {
-      path: '/goeasy',
-      name: 'goeasy',
-      component: goeasy
     },
     {
       path: '/mq',
