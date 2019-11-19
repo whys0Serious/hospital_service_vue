@@ -27,14 +27,14 @@
       <div class="jiaohao">
         <ul style="list-style-type: none">
           <li>已预约人数：<span>{{sumNum}}</span></li>
-          <li>剩余排号人数：<span>30</span></li>
+          <li>剩余排号人数：<span>{{nowNum}}</span></li>
         </ul>
       </div>
     </div>
     <div id="fott" >
-      <el-button type="primary" >呼叫下一位</el-button>
-      <el-button type="success" @click="next">切换下一位</el-button>
-      <el-button type="danger">添加病例</el-button>
+      <el-button type="primary" @click="callnext" >呼叫下一位</el-button>
+      <el-button type="success" @click="shownext">切换下一位</el-button>
+      <el-button type="danger"  @click="FormVisible  = true">添加病例</el-button>
       <el-button type="warning">开处方</el-button>
     </div>
 
@@ -139,6 +139,7 @@
         form:[],
         history:[],
         dialogFormVisible: false,
+        FormVisible:false,
         formLabelWidth: '120px',
         //编辑界面数据
         editForm: {
@@ -166,24 +167,33 @@
          //获取当前科室所有排号数
          axios.get("api/hospital-alipay-server/showNums?depart="+this.doc.department+"&doc="+this.doc.docName).then(res=>{
            this.sumNum=res.data;
+           this.nowNum=this.sumNum;
          })
+         //获取第一位就诊病人信息
          axios.get("api/hospital-alipay-server/showNumUser?depart="+this.doc.department+"&docName="+this.doc.docName+"&num=1").then(res=>{
            this.userMsg=res.data;
            this.num=1;
            this.query();
          })
+
         })
       })
-
-
     },
     methods: {
-      next(){
+      shownext(){
         this.num+=1;
-        alert(this.num);
         axios.get("api/hospital-alipay-server/showNumUser?depart="+this.doc.department+"&docName="+this.doc.docName+"&num="+this.num).then(res=>{
             this.userMsg=res.data;
             this.query();
+        })
+      },
+      callnext(){
+        axios.get("api/hospital-alipay-server/showNumUser?depart="+this.doc.department+"&doc="+this.doc.docName+"&num="+this.num).then(res=>{
+            this.$message.success("已成功呼叫患者")
+          //剩余排号人数
+          axios.get("api/hospital-alipay-server/showNowNums?depart="+this.doc.department+"&doc="+this.doc.docName).then(res=>{
+            this.nowNum=res.data;
+          })
         })
       },
       query(){//查询当前病人所有病历

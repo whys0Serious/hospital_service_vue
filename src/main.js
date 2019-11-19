@@ -7,9 +7,7 @@ import echarts from 'echarts'
 import JsonExcel from 'vue-json-excel'
 Vue.component('downloadExcel', JsonExcel)
 Vue.prototype.$echarts = echarts
-import VueVideoPlayer from 'vue-video-player'
-import 'video.js/dist/video-js.css'
-Vue.use(VueVideoPlayer)
+
 /*
 * 全局挂载cookie
 * */

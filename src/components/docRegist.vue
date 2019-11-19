@@ -136,7 +136,7 @@
           checkPass:'',
           pkDocid:''
         },
-        user:{
+        users:{
           userName:'',
           userMail:'',
           userPass:'',
@@ -173,12 +173,12 @@
         console.log(this.$refs[formName])
         this.$refs[formName].validate((valid)=>{
           if(valid){
-            this.user.userPass=this.Form.userpass
-            this.user.userName=this.Form.username
-            this.user.userMail=this.Form.usermail
-            this.user.userPhone=this.Form.userphone
-            this.user.pkDocid=this.Form.pkDocid
-            axios.post("api/hospital-user-server/docRegist",this.user).then(res=>{
+            this.users.userPass=this.Form.userpass
+            this.users.userName=this.Form.username
+            this.users.userMail=this.Form.usermail
+            this.users.userPhone=this.Form.userphone
+            this.users.pkDocid=this.Form.pkDocid
+            axios.post("api/hospital-user-server/docRegist",this.users).then(res=>{
               this.$notify({
                 title: res.data,
                 message: '3秒后跳转至登录页面',
