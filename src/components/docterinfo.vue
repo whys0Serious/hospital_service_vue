@@ -142,6 +142,7 @@
   export default {
     data() {
       return {
+        state:'',
         indexx:false,  //没有收藏
         docters: {
           doc_name: '', department: '', zhicheng: '', doc_pic: '',specialty: '',did:''
@@ -152,6 +153,9 @@
       }
     },
     methods:{
+      handleSelect(){
+
+      },
       shouyea:function () {
         this.$router.push("/")
       },
@@ -164,6 +168,12 @@
           this.indexx = false;
         } else { //
           // alert("点击收藏")
+          var userid= this.$cookie.get("userMsg")
+          var docid=this.docters.did
+
+          axios.post("api/hospital-indexshow/insert/"+userid+"/"+docid).then(res=>{
+            this.docters=res.data;
+          })
           this.indexx = true;
         }
 
