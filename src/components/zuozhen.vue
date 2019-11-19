@@ -68,6 +68,41 @@
         <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
       </div>
     </el-dialog>
+
+<!--创建病例-->
+    <el-dialog title="创建病例" :visible.sync="FormVisible">
+      <el-form :model="newform">
+        <el-form-item label="病人名称" :label-width="formLabelWidth">
+          <el-input v-model="newform.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="就诊医生" :label-width="formLabelWidth">
+          <el-input v-model="newform.doc_name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="病人性别" :label-width="formLabelWidth">
+          <el-input v-model="newform.userGender" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="就诊门诊" :label-width="formLabelWidth">
+          <el-input v-model="newform.department" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="疾病名称" :label-width="formLabelWidth">
+          <el-input v-model="newform.jibingname" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="使用的药品" :label-width="formLabelWidth">
+          <el-input v-model="newform.yaopin" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="医生医嘱" :label-width="formLabelWidth">
+          <el-input v-model="newform.yizhu" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="药单价格" :label-width="formLabelWidth">
+          <el-input v-model="newform.price" autocomplete="off"></el-input>
+        </el-form-item>
+        <!--记得创建时间-->
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="FormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="FormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -77,6 +112,30 @@
     data(){
       return{
         //传进来的病人
+        form:{
+          id:0,
+          name:'杨春荣',
+          doc_name:'张奇医生',
+          userGender:'男',
+          department:'消化门诊',
+          jibingname:'感冒', //疾病名称
+          yaopin:'安乃静', //使用的药品
+          yizhu:'不要吃饭不要喝水',  //医生嘱咐
+          price:'20.0',  //药品消费价格
+          data:'2019-09-30',  //创建时间
+        },
+        newform:{
+          id:0,
+          name:'',
+          doc_name:'',
+          userGender:'',
+          department:'',
+          jibingname:'', //疾病名称
+          yaopin:'', //使用的药品
+          yizhu:'',  //医生嘱咐
+          price:'',  //药品消费价格
+          // data:'2019-09-30',  //创建时间  由后台创建当前时间
+        },
         form:[],
         history:[],
         dialogFormVisible: false,

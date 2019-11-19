@@ -71,6 +71,10 @@
                         <a href="">{{docters.department}}
                         </a>
                       </p>
+                      <div class="caozuo">
+                        <img v-if="indexx==false" src="../components/static/img/shoucangqian.png" @click="test(indexx)"  />
+                        <img v-if="indexx==true" src="../components/static/img/shoucang.png" @click="test(indexx)"  />
+                      </div>
                     </div>
                     <div class="doc-resume">
                       <div class="doctor-img">
@@ -87,7 +91,7 @@
                       {{docters.specialty}}
                     </p>
                   </div>
-                  <router-link :to="{name:'guahao',query:{id:docters.did}}"><button>挂号</button></router-link>
+                  <router-link :to="{name:'guahao',query:{id:docters.did}}"></router-link>
                 </div>
                 <div class="clinic-and-news">
                   <div class="layout"></div>
@@ -138,6 +142,8 @@
   export default {
     data() {
       return {
+        state:'',
+        indexx:false,  //没有收藏
         docters: {
           doc_name: '', department: '', zhicheng: '', doc_pic: '',specialty: '',did:''
         },
@@ -147,11 +153,30 @@
       }
     },
     methods:{
+      handleSelect(){
+
+      },
       shouyea:function () {
         this.$router.push("/")
       },
       yisheng:function () {
         this.$router.push("docter")
+      },
+      test(indexx){
+        if (this.indexx == true) { //
+          // alert("取消收藏")
+          this.indexx = false;
+        } else { //
+          // alert("点击收藏")
+          var userid= this.$cookie.get("userMsg")
+          var docid=this.docters.did
+
+          axios.post("api/hospital-indexshow/insert/"+userid+"/"+docid).then(res=>{
+            this.docters=res.data;
+          })
+          this.indexx = true;
+        }
+
       },
       query(id){
         //根据查询医生详情
@@ -565,5 +590,15 @@
   .seafdata{
     font-size: 13px;
     float: left;
+  }
+
+  .caozuo{
+    /*background-color: aquamarine;*/
+    width: 15%;
+    height: 30px;
+  }
+  .caozuo img{
+    height: 30px;
+    width:30px;
   }
 </style>
