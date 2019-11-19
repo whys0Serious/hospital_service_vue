@@ -3,7 +3,7 @@
     <el-form :model="docschedule" label-width="20%" style="width: 40%">
       <el-form-item label="医生姓名">
         <el-select  v-model="docschedule.docName" placeholder="请输入医生姓名">
-          <el-option v-for="(d,i) in names"  :value="d" :label="d"></el-option>
+          <el-option v-for="(d,i) in names"  :value="d" :key="i" :label="d"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="活动科室" >
