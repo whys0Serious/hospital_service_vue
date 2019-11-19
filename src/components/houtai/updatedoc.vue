@@ -10,7 +10,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="专长">
-        <el-input v-model="DocMsg.specialty" type="textarea"></el-input>
+        <el-input v-model="DocMsg.specialty" type="textarea" :rows="6"></el-input>
       </el-form-item>
       <el-form-item label="性别">
         <el-radio-group v-model="DocMsg.gender">

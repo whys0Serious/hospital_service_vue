@@ -50,8 +50,9 @@ import docreg from '@/components/houtai/docreg'
 import pinglundainzan from '@/components/houtai/pinglundainzan'
 import goeasy from '@/components/houtai/goeasy'
 import mq from '@/components/houtai/mq'
-import poi from '@/components/houtai/poi'
+import yishengzhuce from '@/components/houtai/yishengzhuce'
 import docRegist from '@/components/docRegist'
+import shipin from '@/components/houtai/shipin'
 
 
 Vue.use(Router)
@@ -288,9 +289,14 @@ export default new Router({
       component: mq
     },
     {
-      path: '/poi',
-      name: 'poi',
-      component: poi
+      path: '/yishengzhuce',
+      name: 'yishengzhuce',
+      component: yishengzhuce
+    },
+    {
+      path: '/shipin',
+      name: 'shipin',
+      component: shipin
     }
 
 

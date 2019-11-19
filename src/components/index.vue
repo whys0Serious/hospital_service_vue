@@ -91,8 +91,14 @@
               <div class="diff-news-box diff-news-box-slick slick-initialized slick-slider slick-dotted" role="toolbar">
                 <div class="slick-list draggable" aria-live="polite">
                   <el-carousel height="380px" >
-                    <el-carousel-item v-for="item in " :key="item">
-                      <h3 class="small">{{ item }}</h3>
+                    <el-carousel-item v-for="item in 5" :key="item">
+                      <!--<h3 class="small">{{ item }}</h3>-->
+                      <video height="380px" controls="controls">
+                        <source src="./day34_3_实现Runnable接口的方式创建线程类.mp4" type="video/mp4" />
+                        <object data="./day34_3_实现Runnable接口的方式创建线程类.mp4" width="320" height="240">
+                          <embed src="./day34_3_实现Runnable接口的方式创建线程类.mp4" width="320" height="240" />
+                        </object>
+                      </video>
                     </el-carousel-item>
                   </el-carousel>
                 </div>
