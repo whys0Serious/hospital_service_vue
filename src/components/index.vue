@@ -91,8 +91,10 @@
               <div class="diff-news-box diff-news-box-slick slick-initialized slick-slider slick-dotted" role="toolbar">
                 <div class="slick-list draggable" aria-live="polite">
                   <el-carousel height="380px" >
-                    <el-carousel-item v-for="item in " :key="item">
-                      <h3 class="small">{{ item }}</h3>
+                    <el-carousel-item v-for="item in 1" :key="item">
+                      <video height="380px" controls="controls">
+                          <source  src="./day34_3_实现Runnable接口的方式创建线程类.mp4" type="video/mp4" />
+                      </video>
                     </el-carousel-item>
                   </el-carousel>
                 </div>
@@ -263,6 +265,7 @@
                   </router-link>
                 </div>
               </a>
+
             </div>
             <el-pagination background layout="prev, pager, next" :page-size="this.params.size" v-on:current-change="changePage" :total="total" :current-page="this.params.page">
             </el-pagination>
@@ -284,6 +287,8 @@
   export default {
     data(){
       return{
+        shippinlist:['day34_3_实现Runnable接口的方式创建线程类.mp4','day34_3_实现Runnable接口的方式创建线程类.mp4','day34_3_实现Runnable接口的方式创建线程类.mp4'],
+        state:'',
         // state:'',
         items:[
           {src:'http://122.51.42.29:8888/group1/M00/00/00/rBEAEF3ItQ2AViJ5AAG27nlip7Y13..jpg'},

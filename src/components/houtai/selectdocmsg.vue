@@ -4,7 +4,7 @@
       <download-excel
         class = "export-excel-wrapper"
         :data = "DocMsg"
-        style="width: 100px;background-color: #8EC172"
+
         name = "医生详单.xls">
         <el-button>
           导出
@@ -37,7 +37,7 @@
         prop="specialty"
         label="医生专长介绍"
         width="180">
-        <el-table-column type="expand" width="300">
+        <el-table-column type="expand" width="">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item label="医生专长介绍">

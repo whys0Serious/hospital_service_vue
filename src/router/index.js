@@ -50,8 +50,11 @@ import cureg from '@/components/houtai/cureg'
 import docreg from '@/components/houtai/docreg'
 import pinglundainzan from '@/components/houtai/pinglundainzan'
 import mq from '@/components/houtai/mq'
-import poi from '@/components/houtai/poi'
+import yishengzhuce from '@/components/houtai/yishengzhuce'
 import docRegist from '@/components/docRegist'
+import shipin from '@/components/houtai/shipin'
+import tianjiaguanliyuan from '@/components/houtai/tianjiaguanliyuan'
+import daoruzhanshi from '@/components/houtai/daoruzhanshi'
 
 
 Vue.use(Router)
@@ -291,9 +294,26 @@ export default new Router({
       path: '/showlove',
       name: 'showlove',
       component: showlove
+    },
+    {
+      path: '/yishengzhuce',
+      name: 'yishengzhuce',
+      component: yishengzhuce
+    },
+    {
+      path: '/shipin',
+      name: 'shipin',
+      component: shipin
+    },
+    {
+      path: '/tianjiaguanliyuan',
+      name: 'tianjiaguanliyuan',
+      component: tianjiaguanliyuan
+    },
+    {
+      path: '/daoruzhanshi',
+      name: 'daoruzhanshi',
+      component: daoruzhanshi
     }
-
-
-
   ]
 })

@@ -14,12 +14,11 @@ Vue.prototype.$echarts = echarts
 import VueCookies from 'vue-cookie'
 Vue.use(VueCookies)
 Vue.config.productionTip = false
-
+//excel导入
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App},
-  template: '<App/>'
-
+  template: '<App/>',
 })
