@@ -20,6 +20,7 @@ import docwelcome from '@/components/docwelcome'
 import pic from '@/components/pic'
 import userOrder from '@/components/userOrder'
 import ApplyMark from '@/components/ApplyMark'
+import showlove from '@/components/showlove'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -285,6 +286,11 @@ export default new Router({
       path: '/poi',
       name: 'poi',
       component: poi
+    },
+    {
+      path: '/showlove',
+      name: 'showlove',
+      component: showlove
     }
 
 

@@ -61,6 +61,10 @@
         <span slot="title" @click="showOrder">挂号记录</span>
       </el-menu-item>
       <el-menu-item index="4">
+        <i class="el-icon-document" ></i>
+        <span slot="title" @click="showLove">我的收藏</span>
+      </el-menu-item>
+      <el-menu-item index="5">
         <i class="el-icon-document"></i>
        <span slot="title"><router-link to="/">回到首页</router-link></span>
       </el-menu-item>
@@ -92,6 +96,9 @@
       },
       showOrder(){
         document.getElementById("srcofmenu").src="http://localhost:1100/#/userOrder";
+      },
+      showLove(){
+        document.getElementById("srcofmenu").src="http://localhost:1100/#/showlove";
       },
       loginOut(){
         var id=this.$cookie.get("userMsg")

@@ -72,8 +72,10 @@
                         </a>
                       </p>
                       <div class="caozuo">
-                        <img v-if="indexx==false" src="../components/static/img/shoucangqian.png" @click="test(indexx)"  />
+                        <img v-if="indexx==false" src="../components/static/img/shoucangqian.png" @click="test(indexx)" />
                         <img v-if="indexx==true" src="../components/static/img/shoucang.png" @click="test(indexx)"  />
+
+                        <img src="../components/static/img/yuyue.png" height="200" width="200" @click="yuyue"/>
                       </div>
                     </div>
                     <div class="doc-resume">
@@ -156,6 +158,10 @@
       handleSelect(){
 
       },
+      //预约
+      yuyue(){
+        alert("预约")
+      },
       shouyea:function () {
         this.$router.push("/")
       },
@@ -166,14 +172,31 @@
         if (this.indexx == true) { //
           // alert("取消收藏")
           this.indexx = false;
+          var userid= this.$cookie.get("userMsg")
+          var docid=this.docters.did
+          axios.get("api/hospital-indexshow/delete/"+userid+"/"+docid).then(res=>{
+          })
+          this.$notify({
+            title: '取消收藏',
+            message: '成功取消收藏',
+            type: 'warning'
+          });
         } else { //
           // alert("点击收藏")
           var userid= this.$cookie.get("userMsg")
           var docid=this.docters.did
-          axios.post("api/hospital-indexshow/insert/"+userid+"/"+docid).then(res=>{
-            this.docters=res.data;
-          })
-          this.indexx = true;
+          if (userid==null){
+            alert("请登陆")
+          }else {
+            axios.get("api/hospital-indexshow/insert/"+userid+"/"+docid).then(res=>{
+            })
+              this.$notify({
+                title: '成功',
+                message: '收藏成功',
+                type: 'success'
+              });
+            this.indexx = true;
+          }
         }
 
       },

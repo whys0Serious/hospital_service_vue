@@ -263,7 +263,6 @@
                   </router-link>
                 </div>
               </a>
-
             </div>
             <el-pagination background layout="prev, pager, next" :page-size="this.params.size" v-on:current-change="changePage" :total="total" :current-page="this.params.page">
             </el-pagination>
@@ -285,7 +284,7 @@
   export default {
     data(){
       return{
-        state:'',
+        // state:'',
         items:[
           {src:'http://122.51.42.29:8888/group1/M00/00/00/rBEAEF3ItQ2AViJ5AAG27nlip7Y13..jpg'},
           {src:'http://122.51.42.29:8888/group1/M00/00/00/rBEAEF3ItZqAAoDhAAGcEU6POsI45..jpg'},
