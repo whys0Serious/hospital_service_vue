@@ -14,6 +14,12 @@ Vue.prototype.$echarts = echarts
 import VueCookies from 'vue-cookie'
 Vue.use(VueCookies)
 Vue.config.productionTip = false
+import VideoPlayer from 'vue-video-player'
+
+require('video.js/dist/video-js.css')
+require('vue-video-player/src/custom-theme.css')
+
+Vue.use(VideoPlayer)
 //excel导入
 /* eslint-disable no-new */
 new Vue({

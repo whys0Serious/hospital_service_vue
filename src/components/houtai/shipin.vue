@@ -3,7 +3,7 @@
     <input ref="excel-upload-input" class="excel-upload-input" type="file" accept=".xlsx, .xls" @change="handleClick">
     <div class="drop" @drop="handleDrop" @dragover="handleDragover" @dragenter="handleDragover">
       <!--<el-button :loading="loading" style="margin-left:16px;" size="mini" type="primary" @click="handleUpload">Browse</el-button>-->
-      <button class="btn" :loading="loading" @click="handleUpload">批量添加</button>
+      <button class="btn" :loading="loading" @click="handleUpload">导入表</button>
     </div>
   </div>
 </template>

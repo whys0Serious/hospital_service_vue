@@ -93,7 +93,7 @@
                   <el-carousel height="380px" >
                     <el-carousel-item v-for="item in 1" :key="item">
                       <video height="380px" controls="controls">
-                          <source  src="./day34_3_实现Runnable接口的方式创建线程类.mp4" type="video/mp4" />
+                          <source id="myvideo" src="./day34_3_实现Runnable接口的方式创建线程类.mp4" type="video/mp4" />
                       </video>
                     </el-carousel-item>
                   </el-carousel>
