@@ -10,7 +10,7 @@
         <el-input v-model="UserMsg.userPass" type="password"></el-input>
       </el-form-item>
       <el-form-item label="管理员邮箱">
-        <el-input v-model="UserMsg.userMail"></el-input>
+        <el-input v-model="UserMsg.userMail" @blur="yanzhengyouxiang"></el-input>
       </el-form-item>
       <el-form-item label="管理员头像">
         <el-upload
@@ -29,8 +29,8 @@
       <el-form-item label="年龄">
         <el-input-number v-model="UserMsg.userAge"></el-input-number>
       </el-form-item>
-      <el-form-item label="管理员手机号码">
-        <el-input v-model="UserMsg.userPhone"></el-input>
+      <el-form-item label="管理员手机号码" >
+        <el-input v-model="UserMsg.userPhone" @blur="yanzhengshouji"></el-input>
       </el-form-item>
       <el-form-item label="是否激活">
         <el-switch v-model="UserMsg.isActivated"></el-switch>
@@ -58,11 +58,31 @@
           return{
             imgUrl:'',
             UserMsg:{
+            },
+            regyanzheng1:false,
 
-            }
           }
       },
     methods:{
+      yanzhengyouxiang(){
+          var reg=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+          if(!reg.test(this.UserMsg.userMail)){
+              alert("邮箱格式不正确")
+            this.regyanzheng1=false
+          }else {
+            this.regyanzheng1=true
+          }
+
+      },
+      yanzhengshouji(){
+        var reg=/^\d{11}$/
+        if(!reg.test(this.UserMsg.userPhone)){
+            alert("手机号格式不正确,请输入11位数字")
+          this.regyanzheng1=false
+        }else {
+            this.regyanzheng1=true
+        }
+      },
       handleAvatarSuccess(res,file){
         this.imgUrl=res
         this.UserMsg.userPic=res

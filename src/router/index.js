@@ -53,6 +53,7 @@ import yishengzhuce from '@/components/houtai/yishengzhuce'
 import docRegist from '@/components/docRegist'
 import shipin from '@/components/houtai/shipin'
 import tianjiaguanliyuan from '@/components/houtai/tianjiaguanliyuan'
+import daoruzhanshi from '@/components/houtai/daoruzhanshi'
 
 
 Vue.use(Router)
@@ -297,6 +298,11 @@ export default new Router({
       path: '/tianjiaguanliyuan',
       name: 'tianjiaguanliyuan',
       component: tianjiaguanliyuan
+    },
+    {
+      path: '/daoruzhanshi',
+      name: 'daoruzhanshi',
+      component: daoruzhanshi
     }
   ]
 })

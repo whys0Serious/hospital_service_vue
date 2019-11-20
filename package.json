@@ -16,7 +16,9 @@
     "vue": "^2.5.2",
     "vue-cookie": "^1.1.4",
     "vue-json-excel": "^0.2.98",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-xlsx-table": "^1.2.8",
+    "xlsx": "^0.14.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
