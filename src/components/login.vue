@@ -63,7 +63,7 @@
             <el-radio v-model="ruleForm.role" label="管理员">管理员</el-radio>
         <el-form-item style="margin-top: 10px;margin-left: -10px">
           <el-button @click="submitForm('ruleForm')" style="background-color:#6cb3ff;border: 0px;color: white">立即登录</el-button>
-          <el-button style="background-color: #4be65d;color:white;border: 0px">扫码登陆</el-button> <el-button style="background-color: #4be65d;color:white;border: 0px"><a href="https://github.com/login/oauth/authorize?client_id=bb9ea8105130af560a80&scope=user,public_repo">github登陆</a></el-button>
+          <el-button style="background-color: #4be65d;color:white;border: 0px">扫码登陆</el-button>
           <el-button @click="forRegist()" style="background-color: #e6b73b;color:white;border: 0px">前往注册</el-button>
           </el-form-item>
         </el-form>
@@ -216,7 +216,8 @@
           }
           return false;
         })
-      }, loginOut(){
+      },
+      loginOut(){
         var id=this.$cookie.get("userMsg")
         axios.get("api/hospital-user-server/loginOut?id="+id).then(res=>{
           this.$message.info("注销成功！")

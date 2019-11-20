@@ -18,7 +18,7 @@
               <div v-if="flag">
                 <div class="userimg"><img :src="user.userPic" height="100%" width="100%" style="border-radius: 100%"/></div>
                 <div class="userimg_left">
-                  <div style="float: right;width: 100%"><div style="margin-left: 30%"><span class="logsize">欢迎:</span><span class="logze">{{user.userName}} </span><span class="logsize"> 登陆平台</span></div></div>
+                  <div style="float: right;width: 100%"><div style="margin-left: 30%"><span class="logsize">欢迎:</span><span class="logze">{{user.userName}}</span><span class="logsize"> 登陆平台</span></div></div>
                   <div v-if="(user.identity)==('用户')">
                     <div class="info"><el-button type="danger"><router-link to="/userContainer">个人中心</router-link></el-button></div>
                   </div>
@@ -92,7 +92,7 @@
                 <div class="slick-list draggable" aria-live="polite">
                   <el-carousel height="380px" >
                     <el-carousel-item v-for="item in 1" :key="item">
-                      <video height="380px" controls="controls">
+                      <video height="380px" controls="controls" autoplay="autoplay">
                           <source id="myvideo" src="./day34_3_实现Runnable接口的方式创建线程类.mp4" type="video/mp4" />
                       </video>
                     </el-carousel-item>
@@ -306,7 +306,8 @@
         flag:false,
         user:[],
         depatment:[],
-        docters:[]
+        docters:[],
+        gituser:''
       }
     },
 
@@ -359,6 +360,7 @@
     },
     mounted(){
       var id= this.$cookie.get("userMsg")
+      this.gituser= this.$cookie.get("gituser")
       axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
         this.user=res.data
         this.flag=true;
