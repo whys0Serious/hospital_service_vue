@@ -17,6 +17,13 @@ module.exports = {
         pathRewrite: {
           '^/api': '/'
         }
+      },
+      '/gitauth': {
+        target: 'https://github.com/login/oauth/', //你真正的请求路径
+        changeOrigin: true,  //打开跨域
+        pathRewrite: {
+          '^/gitauth': '/'
+        }
       }
     },
 

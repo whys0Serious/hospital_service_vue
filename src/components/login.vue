@@ -63,7 +63,7 @@
             <el-radio v-model="ruleForm.role" label="管理员">管理员</el-radio>
         <el-form-item style="margin-top: 10px;margin-left: -10px">
           <el-button @click="submitForm('ruleForm')" style="background-color:#6cb3ff;border: 0px;color: white">立即登录</el-button>
-          <el-button style="background-color: #4be65d;color:white;border: 0px">扫码登陆</el-button>
+          <el-button style="background-color: #4be65d;color:white;border: 0px">扫码登陆</el-button> <el-button style="background-color: #4be65d;color:white;border: 0px"><a href="https://github.com/login/oauth/authorize?client_id=bb9ea8105130af560a80&scope=user,public_repo">github登陆</a></el-button>
           <el-button @click="forRegist()" style="background-color: #e6b73b;color:white;border: 0px">前往注册</el-button>
           </el-form-item>
         </el-form>
@@ -99,6 +99,52 @@
         }
       };
           return{
+              mygituser:{
+        "login": "mawencai-oss",
+        "id": 55938345,
+        "node_id": "MDQ6VXNlcjU1OTM4MzQ1",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/55938345?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mawencai-oss",
+        "html_url": "https://github.com/mawencai-oss",
+        "followers_url": "https://api.github.com/users/mawencai-oss/followers",
+        "following_url": "https://api.github.com/users/mawencai-oss/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mawencai-oss/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mawencai-oss/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mawencai-oss/subscriptions",
+        "organizations_url": "https://api.github.com/users/mawencai-oss/orgs",
+        "repos_url": "https://api.github.com/users/mawencai-oss/repos",
+        "events_url": "https://api.github.com/users/mawencai-oss/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mawencai-oss/received_events",
+        "type": "User",
+        "site_admin": false,
+        "name": null,
+        "company": null,
+        "blog": "",
+        "location": null,
+        "email": null,
+        "hireable": null,
+        "bio": null,
+        "public_repos": 4,
+        "public_gists": 0,
+        "followers": 1,
+        "following": 1,
+        "created_at": "2019-09-29T05:19:08Z",
+        "updated_at": "2019-11-19T01:09:57Z",
+        "private_gists": 1,
+        "total_private_repos": 0,
+        "owned_private_repos": 0,
+        "disk_usage": 267,
+        "collaborators": 0,
+        "two_factor_authentication": false,
+        "plan": {
+        "name": "free",
+          "space": 976562499,
+          "collaborators": 0,
+          "private_repos": 10000
+      }
+
+    },
             users:{//发送到后台
               userMail:'',
               userPass:'',
@@ -125,6 +171,24 @@
     methods:{
       forRegist(){//跳转登录
           this.$router.push("/regist");
+      },
+      loginauth(){
+        var wlh=window.location.href
+        if(wlh.includes("code")){
+          var code=(wlh.substring(wlh.indexOf("=")+1,wlh.indexOf("#")))
+          axios.get("gitauth/access_token?client_id=bb9ea8105130af560a80&client_secret=4c29dadd2f3a648522aa3f09a04d1c466de4c407&code="+code).then(res=>{
+            axios.get("https://api.github.com/user?"+res.data).then(res2=>{
+               this.mygituser=res2.data
+              this.$cookie.set("gituser",this.mygituser.login)
+              alert(this.$cookie.get("gituser"))
+              this.$router.push("/")
+            })
+          }).catch((erorr)=>{
+          })
+        }else {
+          this.$message.error("请求不存在")
+        }
+
       },
       submitForm(formName){//提交登录信息
         console.log(this.$refs[formName])
@@ -165,6 +229,7 @@
     },
 
     mounted(){
+        this.loginauth()
       var id= this.$cookie.get("userMsg")
       if(id!=null){
           this.$router.push("/")

@@ -8,7 +8,7 @@
             style="width: 230px; margin-top: 20px;margin-left: 100px;height: 230px;border-radius: 100%"
             :src="user.userPic"></el-image>
         </div>
-        <div id="name"><span style="line-height: 60px;margin-left: 38%;font-weight: bolder;color:#4298e8;font-size: large">{{user.userName}},您好</span></div>
+        <div id="name"><span style="line-height: 60px;margin-left: 38%;font-weight: bolder;color:#4298e8;font-size: large"><span v-if="this.gituser">{{this.gituser}},您好</span><span v-if="user.userName">{{user.userName}},您好</span></span></div>
         <div id="message">
           <el-upload
             class="avatar-uploader"
@@ -64,6 +64,7 @@
 export default{
     data(){
         return {
+          gituser:'',
           user: {
               userPic:'',
               userName:'',
@@ -136,6 +137,8 @@ export default{
   },
   mounted(){
         var id=this.$cookie.get("userMsg")
+        console.log(id)
+        this.gituser=this.$cookie.get("gituser")
         axios.get("api/hospital-user-server/getUserMsg?id="+id).then(res=>{
             this.user=res.data;
             this.ruleForm=res.data;

@@ -7,6 +7,7 @@
         <div>{{item}}</div>
       </div>
     </div>
+    <el-button class="el-icon-mouse" @click=""><a href="https://github.com/login/oauth/authorize?client_id=bb9ea8105130af560a80&scope=user,public_repo">登陆</a></el-button>
   </div>
 </template>
 <script>
@@ -19,6 +20,11 @@
           }
       },
     methods:{
+      loginauth(){
+        axios.get("").then(res=>{
+            alert(res.data)
+        })
+      },
       sendms1(){
           axios.get("api/mq/sendms1/"+1+"/"+this.ms1).then(res=>{
               this.$message.success(res.data)

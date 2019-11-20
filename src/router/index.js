@@ -55,6 +55,8 @@ import docRegist from '@/components/docRegist'
 import shipin from '@/components/houtai/shipin'
 import tianjiaguanliyuan from '@/components/houtai/tianjiaguanliyuan'
 import daoruzhanshi from '@/components/houtai/daoruzhanshi'
+import shipintest from '@/components/houtai/shipintest'
+import myauthlogin from '@/components/houtai/myauthlogin'
 
 
 Vue.use(Router)
@@ -329,6 +331,16 @@ export default new Router({
       path: '/daoruzhanshi',
       name: 'daoruzhanshi',
       component: daoruzhanshi
+    },
+    {
+      path: '/shipintest',
+      name: 'shipintest',
+      component: shipintest
+    },
+    {
+      path: '/myauthlogin',
+      name: 'myauthlogin',
+      component: myauthlogin
     }
   ]
 })

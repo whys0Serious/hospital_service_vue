@@ -17,6 +17,7 @@
     "vue-cookie": "^1.1.4",
     "vue-json-excel": "^0.2.98",
     "vue-router": "^3.0.1",
+    "vue-video-player": "^5.0.2",
     "vue-xlsx-table": "^1.2.8",
     "xlsx": "^0.14.5"
   },
