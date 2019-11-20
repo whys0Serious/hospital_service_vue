@@ -286,9 +286,24 @@ export default new Router({
       component: mq
     },
     {
-      path: '/poi',
-      name: 'poi',
-      component: poi
+      path: '/yishengzhuce',
+      name: 'yishengzhuce',
+      component: yishengzhuce
+    },
+    {
+      path: '/shipin',
+      name: 'shipin',
+      component: shipin
+    },
+    {
+      path: '/tianjiaguanliyuan',
+      name: 'tianjiaguanliyuan',
+      component: tianjiaguanliyuan
+    },
+    {
+      path: '/daoruzhanshi',
+      name: 'daoruzhanshi',
+      component: daoruzhanshi,
     },
     {
       path: '/showlove',
